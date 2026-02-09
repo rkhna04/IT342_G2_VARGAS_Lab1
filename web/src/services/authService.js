@@ -1,12 +1,12 @@
-const API_BASE_URL = 'http://localhost:8081/api';
+const API_BASE_URL = "http://localhost:8081/api";
 
 export const authService = {
   register: async (firstName, lastName, email, password) => {
     try {
-      const response = await fetch(\\/auth/register\, {
-        method: 'POST',
+      const response = await fetch(`${API_BASE_URL}/auth/register`, {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({
           firstName,
@@ -16,12 +16,18 @@ export const authService = {
         }),
       });
 
-      if (!response.ok) {
-        const error = await response.json();
-        throw new Error(error.message || 'Registration failed');
+      const text = await response.text();
+      let data;
+      try {
+        data = JSON.parse(text);
+      } catch (e) {
+        throw new Error("Server returned invalid JSON response");
       }
 
-      const data = await response.json();
+      if (!response.ok) {
+        throw new Error(data.message || "Registration failed");
+      }
+
       return data;
     } catch (error) {
       throw error;
@@ -30,10 +36,10 @@ export const authService = {
 
   login: async (email, password) => {
     try {
-      const response = await fetch(\\/auth/login\, {
-        method: 'POST',
+      const response = await fetch(`${API_BASE_URL}/auth/login`, {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({
           email,
@@ -41,14 +47,23 @@ export const authService = {
         }),
       });
 
-      if (!response.ok) {
-        const error = await response.json();
-        throw new Error(error.message || 'Login failed');
+      const text = await response.text();
+      let data;
+      try {
+        data = JSON.parse(text);
+      } catch (e) {
+        throw new Error("Server returned invalid JSON response");
       }
 
-      const data = await response.json();
-      localStorage.setItem('authToken', data.token);
-      localStorage.setItem('user', JSON.stringify(data.user));
+      if (!response.ok) {
+        throw new Error(data.message || "Login failed");
+      }
+
+      if (data.token && data.user) {
+        localStorage.setItem("authToken", data.token);
+        localStorage.setItem("user", JSON.stringify(data.user));
+      }
+
       return data;
     } catch (error) {
       throw error;
@@ -57,19 +72,26 @@ export const authService = {
 
   getUser: async (token) => {
     try {
-      const response = await fetch(\\/user/me\, {
-        method: 'GET',
+      const response = await fetch(`${API_BASE_URL}/user/me`, {
+        method: "GET",
         headers: {
-          'Content-Type': 'application/json',
-          'Authorization': \Bearer \\,
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`,
         },
       });
 
-      if (!response.ok) {
-        throw new Error('Failed to fetch user');
+      const text = await response.text();
+      let data;
+      try {
+        data = JSON.parse(text);
+      } catch (e) {
+        throw new Error("Server returned invalid JSON response");
       }
 
-      const data = await response.json();
+      if (!response.ok) {
+        throw new Error(data.message || "Failed to fetch user");
+      }
+
       return data;
     } catch (error) {
       throw error;
@@ -77,8 +99,8 @@ export const authService = {
   },
 
   logout: () => {
-    localStorage.removeItem('authToken');
-    localStorage.removeItem('user');
+    localStorage.removeItem("authToken");
+    localStorage.removeItem("user");
   },
 };
 
