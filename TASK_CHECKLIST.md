@@ -1,73 +1,46 @@
-# IT342_G5_Vargas_Lab1 - Task Checklist
+# IT342_G2_VARGAS_Lab1 - Task Checklist
 
 ## DONE
 
 ### Backend Implementation
-- [x] Created Spring Boot project structure with proper configuration
-  - **Commit:** 4ebeb5e
-  - Updated User model to use firstName and lastName fields
-  - Enhanced AuthController with proper JSON responses
-  - Created DTOs: LoginResponse, UserDTO, RegisterRequest
+- [x] Created Spring Boot project with User authentication system
+  - **Commit:** 6c9cf8d7
+  - User model with firstName, lastName, email, password, phone, address, city, country
+  - AuthController: `/api/auth/register` and `/api/auth/login`
+  - UserController: `/api/user/me` (GET/PUT for profile management)
+  - BCrypt password encryption and JWT authentication
+  - MySQL database (lab1_db) with JPA/Hibernate
 
 ### Frontend Implementation  
-- [x] Created Candyland-themed React application
-  - **Commit:** To be committed
-  - Implemented Register component with validation
-  - Implemented Login component with authentication
-  - Implemented Dashboard/Profile component
-  - Implemented ProtectedRoute component
-  - Created API service layer for backend communication
+- [x] React authentication system with full UI
+  - **Commit:** 6c9cf8d7
+  - Register and Login components with validation
+  - Dashboard with Profile and Logout buttons
+  - Profile page with edit functionality (all user fields)
+  - Custom logout confirmation modal with Yes/No buttons
+  - Minimalist Brown theme (professional color palette)
+  - Responsive design with smooth animations
 
-### Database
-- [x] MySQL connection configured (127.0.0.1:3306)
-  - **Commit:** 4ebeb5e
-  - Database: user_auth_db
-  - Hibernate ORM configured with auto-update
-
-### Security
-- [x] Password encryption with BCrypt implemented
-  - **Commit:** 4ebeb5e
-  - Spring Security configuration in place
-  - CORS enabled for http://localhost:3000
+### Project Structure
+- [x] Organized repository structure
+  - **Commit:** (pending)
+  - Created /mobile folder for future mobile app
+  - Added .gitignore for build artifacts
+  - Removed unnecessary files (target/, node_modules/, temp docs)
 
 ## IN-PROGRESS
 
-### API Endpoints
-- [ ] POST /api/auth/register - Implemented, needs testing
-- [ ] POST /api/auth/login - Implemented, needs testing
-- [ ] GET /api/user/me - Implemented, needs testing
-
-### Frontend Styling
-- [ ] Candyland theme CSS with pink, purple, blue color palette - COMPLETED
-- [ ] Form animations and transitions - COMPLETED
-- [ ] Responsive design - COMPLETED
-
-### Testing & Integration
-- [ ] End-to-end testing of registration flow
-- [ ] End-to-end testing of login flow
-- [ ] Dashboard functionality verification
+### Documentation
+- [ ] Take screenshots of Register, Login, Dashboard, Profile pages
+- [ ] Create FRS PDF with web screenshots
 
 ## TODO
 
-### Documentation
-- [ ] Create ERD (Entity Relationship Diagram)
-- [ ] Update UML diagrams from previous activity
-- [ ] Take screenshots of Register page
-- [ ] Take screenshots of Login page
-- [ ] Take screenshots of Dashboard page
-- [ ] Create FRS PDF with all diagrams and screenshots
-
-### Repository Structure
-- [ ] Organize /docs folder with FRS PDF
-- [ ] Create README.md for the project
-- [ ] Push all changes to public GitHub repository
-- [ ] Create /mobile folder structure
-
-### Deployment
-- [ ] Verify backend runs on port 8081
-- [ ] Verify frontend runs on port 3000
-- [ ] Test full authentication flow
-- [ ] Prepare for submission to MS Teams
+### Final Submission
+- [ ] Update FRS PDF in /docs folder
+- [ ] Commit and push all changes to GitHub
+- [ ] Verify both backend and frontend run successfully
+- [ ] Submit to MS Teams
 
 ## System Architecture
 
@@ -81,65 +54,53 @@
 
 ### Frontend Stack
 - Framework: React 18.2.x
-- Styling: CSS with Candyland theme
+- Styling: CSS with a custom theme (monospace fonts)
 - State Management: React Hooks (useState, useContext)
 - HTTP Client: Fetch API
 - Build Tool: Node.js/npm (react-scripts)
 
 ### Database Schema
-`
-users
- id (BIGINT, PRIMARY KEY, AUTO_INCREMENT)
- firstName (VARCHAR, NOT NULL)
- lastName (VARCHAR, NOT NULL)
- email (VARCHAR, NOT NULL, UNIQUE)
- password (VARCHAR, NOT NULL, BCRYPT_ENCODED)
-`
+```
+users table:
+- id (BIGINT, PRIMARY, AUTO_INCREMENT)
+- firstName, lastName, email (UNIQUE), password (BCRYPT)
+- phone, address, city, country
+```
 
-### API Endpoints Summary
+### API Endpoints
 | Method | Endpoint | Description | Auth |
 |--------|----------|-------------|------|
 | POST | /api/auth/register | Register new user | No |
 | POST | /api/auth/login | Login user | No |
-| GET | /api/user/me | Get current user profile | Yes |
+| GET | /api/user/me | Get user profile | Yes (JWT) |
+| PUT | /api/user/me | Update user profile | Yes (JWT) |
 
-## Candyland Theme Colors
-- Primary Pink: #FF69B4
-- Secondary Purple: #9D4EDD
-- Accent Blue: #3A86FF
-- Highlight Yellow: #FFB703
-- Accent Red: #FB5607
-- Mint Green: #06D6A0
-- Light Pink: #FFB3D9
-- Cream: #FFF5E6
+## Current Theme: Minimalist Brown
+- Primary: #8B6F47 (Warm Brown)
+- Secondary: #5D4E37 (Dark Brown)
+- Accent: #C17855 (Terracotta)
+- Highlight: #D4A574 (Tan)
+- Danger: #B85450 (Muted Red)
+- Success: #6B8E23 (Olive Green)
+- Background: #FAF8F5 (Warm Cream)
 
-## Running the Application
+### Running the Application
 
-### Start Backend
-\\\ash
+**Start Backend** (from workspace root):
+``Backend** (port 8081):
+```bash
 cd backend
-.\mvnw spring-boot:run
-# Runs on http://localhost:8081
-\\\
+mvn spring-boot:run
+```
 
-### Start Frontend
-\\\ash
+**Frontend** (port 3000):
+```bash
 cd web
 npm install
 npm start
-# Runs on http://localhost:3000
-\\\
+```
 
-### Database Setup
-- Ensure MySQL is running on 127.0.0.1:3306
-- Database will be auto-created by Hibernate
-- Default credentials: root (no password)
-
-## Notes for Next Session (Mobile)
-- Mobile application to be implemented using React Native or Flutter
-- Will use the same backend APIs
-- Authentication token from login will be reused
-
+**Database**: MySQL on 127.0.0.1:3306, database: `lab1_db`
 ---
 
 **Last Updated:** February 9, 2026

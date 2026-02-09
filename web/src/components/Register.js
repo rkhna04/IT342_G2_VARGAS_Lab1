@@ -67,30 +67,32 @@ function Register({ onSwitchToLogin }) {
       {error && <div className='message error-message'>{error}</div>}
       {success && <div className='message success-message'>{success}</div>}
 
-      <div className='form-group'>
-        <label className='form-label'>First Name</label>
-        <input
-          type='text'
-          name='firstName'
-          className='form-input'
-          placeholder='Enter your first name'
-          value={formData.firstName}
-          onChange={handleChange}
-          disabled={loading}
-        />
-      </div>
+      <div className='name-row'>
+        <div className='form-group'>
+          <label className='form-label'>First Name</label>
+          <input
+            type='text'
+            name='firstName'
+            className='form-input'
+            placeholder='Enter your first name'
+            value={formData.firstName}
+            onChange={handleChange}
+            disabled={loading}
+          />
+        </div>
 
-      <div className='form-group'>
-        <label className='form-label'>Last Name</label>
-        <input
-          type='text'
-          name='lastName'
-          className='form-input'
-          placeholder='Enter your last name'
-          value={formData.lastName}
-          onChange={handleChange}
-          disabled={loading}
-        />
+        <div className='form-group'>
+          <label className='form-label'>Last Name</label>
+          <input
+            type='text'
+            name='lastName'
+            className='form-input'
+            placeholder='Enter your last name'
+            value={formData.lastName}
+            onChange={handleChange}
+            disabled={loading}
+          />
+        </div>
       </div>
 
       <div className='form-group'>
