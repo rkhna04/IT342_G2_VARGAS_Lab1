@@ -73,7 +73,7 @@ POST /api/auth/register
 ## 🎨 Tech Stack
 
 **Backend:** Spring Boot 2.7.12, Java 11, MySQL 8.0, Hibernate, JWT, BCrypt  
-**Frontend:** React 18.2, Custom CSS (Minimalist Brown theme)
+**Frontend:** React 18.2, Custom CSS
 
 ## 📄 License
 
