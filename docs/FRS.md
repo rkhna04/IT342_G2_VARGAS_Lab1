@@ -46,3 +46,7 @@ Sections to include in the final FRS PDF:
 Notes
 - Before submission, export this content as a PDF named `FRS.pdf` in this folder.
 - Include a DOCX version and individual images of diagrams and screenshots.
+
+References
+- Security and password encryption guidance:
+	https://docs.google.com/document/d/11-kREjkIxfU3frxlZvsAXud2vJRT4l6J/edit?usp=sharing&ouid=114271828034962477720&rtpof=true&sd=true
