@@ -5,30 +5,37 @@
 }
 
 :root {
-  /* Minimalist Brown Color Palette */
-  --primary: #8B6F47;        /* Warm Brown */
-  --secondary: #5D4E37;      /* Dark Brown */
-  --accent: #C17855;         /* Terracotta */
-  --highlight: #D4A574;      /* Tan */
-  --danger: #B85450;         /* Muted Red */
-  --success: #6B8E23;        /* Olive Green */
-  --muted: #F5F0E8;          /* Light Cream */
-  --background: #FAF8F5;     /* Warm Cream */
-  --border: #D7CCC8;         /* Light Brown */
-  --text-primary: #3E2723;   /* Dark Brown */
-  --text-secondary: #8D7B68; /* Medium Brown */
+  /* Beauty color palette */
+  --blush-pink: #F8C8DC;
+  --nude-beige: #F5E6DA;
+  --cream: #FFF8F0;
+  --soft-mauve: #C38EB4;
+  --light-gray: #EAEAEA;
+
+  /* Semantic mapping */
+  --primary: var(--soft-mauve);
+  --secondary: var(--blush-pink);
+  --accent: var(--blush-pink);
+  --highlight: var(--nude-beige);
+  --danger: #B85450;
+  --success: #6B8E23;
+  --muted: var(--cream);
+  --background: var(--cream);
+  --border: var(--light-gray);
+  --text-primary: #3E2723;
+  --text-secondary: #8D7B68;
 }
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
   background: var(--background);
   color: var(--text-primary);
   min-height: 100vh;
   overflow-x: hidden;
   background-image: 
-    radial-gradient(circle at 20% 80%, rgba(193, 120, 85, 0.03) 0%, transparent 50%),
-    radial-gradient(circle at 80% 20%, rgba(139, 111, 71, 0.03) 0%, transparent 50%);
+    radial-gradient(circle at 20% 80%, rgba(248, 200, 220, 0.15) 0%, transparent 45%),
+    radial-gradient(circle at 80% 20%, rgba(195, 142, 180, 0.12) 0%, transparent 45%);
   background-attachment: fixed;
 }
 
@@ -49,7 +56,7 @@ body {
   height: 100%;
   pointer-events: none;
   z-index: -1;
-  background: linear-gradient(135deg, #FAF8F5 0%, #F5EFE7 100%);
+  background: linear-gradient(135deg, var(--cream) 0%, var(--nude-beige) 100%);
 }
 
 .candy-bg {
@@ -104,6 +111,7 @@ body {
   margin-bottom: 30px;
   font-weight: 600;
   letter-spacing: -0.5px;
+  font-family: 'Playfair Display', serif;
 }
 
 .form-group {
@@ -311,6 +319,7 @@ body {
   margin-bottom: 12px;
   font-weight: 600;
   letter-spacing: -0.5px;
+   font-family: 'Playfair Display', serif;
 }
 
 .dashboard-subtitle {
