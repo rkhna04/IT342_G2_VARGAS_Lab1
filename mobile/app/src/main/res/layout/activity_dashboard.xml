@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:text="Welcome!"
         android:textSize="32sp"
-        android:textStyle="bold"
+        style="@style/TextHeading"
         android:textColor="#5D4E37"
         android:layout_marginBottom="48dp" />
 
@@ -23,6 +23,7 @@
         android:layout_height="56dp"
         android:text="View/Edit Profile"
         android:textSize="16sp"
+        android:fontFamily="@font/poppins"
         android:background="#8B6F47"
         android:textColor="#FFFFFF"
         android:layout_marginBottom="16dp" />
@@ -33,6 +34,7 @@
         android:layout_height="56dp"
         android:text="LOGOUT"
         android:textSize="16sp"
+        android:fontFamily="@font/poppins"
         android:background="#B85450"
         android:textColor="#FFFFFF" />
 

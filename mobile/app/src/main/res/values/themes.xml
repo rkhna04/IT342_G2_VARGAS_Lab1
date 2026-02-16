@@ -7,5 +7,6 @@
         <item name="colorSecondaryVariant">#D4A574</item>
         <item name="android:colorBackground">#FAF8F5</item>
         <item name="colorError">#B85450</item>
+        <item name="android:fontFamily">@font/poppins</item>
     </style>
 </resources>

@@ -15,7 +15,7 @@
             android:layout_height="wrap_content"
             android:text="Register"
             android:textSize="28sp"
-            android:textStyle="bold"
+            style="@style/TextHeading"
             android:textColor="#5D4E37"
             android:layout_marginBottom="32dp" />
 
@@ -27,6 +27,7 @@
             android:background="#FFFFFF"
             android:padding="12dp"
             android:textColor="#333333"
+            android:fontFamily="@font/poppins"
             android:layout_marginBottom="16dp"
             android:backgroundTint="#D4A574" />
 
@@ -38,6 +39,7 @@
             android:background="#FFFFFF"
             android:padding="12dp"
             android:textColor="#333333"
+            android:fontFamily="@font/poppins"
             android:layout_marginBottom="16dp"
             android:backgroundTint="#D4A574" />
 
@@ -50,6 +52,7 @@
             android:background="#FFFFFF"
             android:padding="12dp"
             android:textColor="#333333"
+            android:fontFamily="@font/poppins"
             android:layout_marginBottom="16dp"
             android:backgroundTint="#D4A574" />
 
@@ -62,6 +65,7 @@
             android:background="#FFFFFF"
             android:padding="12dp"
             android:textColor="#333333"
+            android:fontFamily="@font/poppins"
             android:layout_marginBottom="32dp"
             android:backgroundTint="#D4A574" />
 
@@ -79,6 +83,7 @@
             android:layout_height="56dp"
             android:text="REGISTER"
             android:textSize="16sp"
+            android:fontFamily="@font/poppins"
             android:background="#8B6F47"
             android:textColor="#FFFFFF" />
 
