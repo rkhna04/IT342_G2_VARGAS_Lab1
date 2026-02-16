@@ -24,9 +24,8 @@ data class UpdateProfileRequest(
     val lastName: String? = null,
     val email: String? = null,
     val phone: String? = null,
-    val address: String? = null,
-    val city: String? = null,
-    val country: String? = null
+    val gender: String? = null,
+    val age: Int? = null
 )
 
 interface AuthApi {

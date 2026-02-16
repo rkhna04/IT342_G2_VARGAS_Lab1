@@ -17,17 +17,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
-        <Button
-            android:id="@+id/btn_back_top"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="← Back"
-            android:textSize="14sp"
-            android:fontFamily="@font/poppins"
-            android:textColor="@color/textSecondary"
-            android:backgroundTint="@color/cardTint"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp" />
+     
 
     </LinearLayout>
 
@@ -104,10 +94,10 @@
             android:backgroundTint="@color/accent_light" />
 
         <EditText
-            android:id="@+id/et_address"
+            android:id="@+id/et_gender"
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:hint="Address"
+            android:hint="Gender"
             android:background="#FFFFFF"
             android:padding="12dp"
             android:textColor="@color/textPrimary"
@@ -115,21 +105,11 @@
             android:backgroundTint="@color/accent_light" />
 
         <EditText
-            android:id="@+id/et_city"
+            android:id="@+id/et_age"
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:hint="City"
-            android:background="#FFFFFF"
-            android:padding="12dp"
-            android:textColor="@color/textPrimary"
-            android:layout_marginBottom="12dp"
-            android:backgroundTint="@color/accent_light" />
-
-        <EditText
-            android:id="@+id/et_country"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:hint="Country"
+            android:hint="Age"
+            android:inputType="number"
             android:background="#FFFFFF"
             android:padding="12dp"
             android:textColor="@color/textPrimary"

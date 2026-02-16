@@ -18,9 +18,14 @@ public class User {
 
     private String password;
     private String phone;
+    // Deprecated address info (kept for backward compatibility)
     private String address;
     private String city;
     private String country;
+
+    // New fields
+    private String gender;
+    private Integer age;
 
     private LocalDateTime createdAt = LocalDateTime.now();
 
@@ -42,6 +47,10 @@ public class User {
     public void setCity(String city) { this.city = city; }
     public String getCountry() { return country; }
     public void setCountry(String country) { this.country = country; }
+    public String getGender() { return gender; }
+    public void setGender(String gender) { this.gender = gender; }
+    public Integer getAge() { return age; }
+    public void setAge(Integer age) { this.age = age; }
     public LocalDateTime getCreatedAt() { return createdAt; }
     public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
 }

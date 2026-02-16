@@ -70,9 +70,8 @@ public class UserController {
             userData.put("lastName", u.getLastName());
             userData.put("email", u.getEmail());
             userData.put("phone", u.getPhone() != null ? u.getPhone() : "");
-            userData.put("address", u.getAddress() != null ? u.getAddress() : "");
-            userData.put("city", u.getCity() != null ? u.getCity() : "");
-            userData.put("country", u.getCountry() != null ? u.getCountry() : "");
+            userData.put("gender", u.getGender() != null ? u.getGender() : "");
+            userData.put("age", u.getAge() != null ? u.getAge() : null);
             userData.put("createdAt", u.getCreatedAt());
 
             return ResponseEntity.ok(buildApiResponse("success", "User profile retrieved", userData));
@@ -125,14 +124,23 @@ public class UserController {
             if (body.containsKey("phone") && body.get("phone") != null) {
                 u.setPhone(body.get("phone").trim());
             }
-            if (body.containsKey("address") && body.get("address") != null) {
-                u.setAddress(body.get("address").trim());
+            // New fields
+            if (body.containsKey("gender") && body.get("gender") != null) {
+                u.setGender(body.get("gender").trim());
             }
-            if (body.containsKey("city") && body.get("city") != null) {
-                u.setCity(body.get("city").trim());
-            }
-            if (body.containsKey("country") && body.get("country") != null) {
-                u.setCountry(body.get("country").trim());
+            if (body.containsKey("age") && body.get("age") != null) {
+                try {
+                    String ageStr = body.get("age").trim();
+                    if (!ageStr.isEmpty()) {
+                        Integer age = Integer.parseInt(ageStr);
+                        if (age < 0 || age > 150) {
+                            return ResponseEntity.badRequest().body(buildApiResponse("error", "Invalid age value", null));
+                        }
+                        u.setAge(age);
+                    }
+                } catch (NumberFormatException ex) {
+                    return ResponseEntity.badRequest().body(buildApiResponse("error", "Age must be a number", null));
+                }
             }
 
             userRepository.save(u);
@@ -143,9 +151,8 @@ public class UserController {
             userData.put("lastName", u.getLastName());
             userData.put("email", u.getEmail());
             userData.put("phone", u.getPhone() != null ? u.getPhone() : "");
-            userData.put("address", u.getAddress() != null ? u.getAddress() : "");
-            userData.put("city", u.getCity() != null ? u.getCity() : "");
-            userData.put("country", u.getCountry() != null ? u.getCountry() : "");
+            userData.put("gender", u.getGender() != null ? u.getGender() : "");
+            userData.put("age", u.getAge() != null ? u.getAge() : null);
             userData.put("createdAt", u.getCreatedAt());
 
             return ResponseEntity.ok(buildApiResponse("success", "Profile updated successfully", userData));

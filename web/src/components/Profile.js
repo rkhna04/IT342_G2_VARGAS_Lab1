@@ -8,9 +8,8 @@ function Profile({ user, onUpdateUser, onBack }) {
     lastName: user?.lastName || '',
     email: user?.email || '',
     phone: user?.phone || '',
-    address: user?.address || '',
-    city: user?.city || '',
-    country: user?.country || '',
+    gender: user?.gender || '',
+    age: user?.age ?? '',
   });
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState('');
@@ -31,7 +30,14 @@ function Profile({ user, onUpdateUser, onBack }) {
     setLoading(true);
 
     try {
-      const updatedUser = await authService.updateProfile(formData);
+      const updatedUser = await authService.updateProfile({
+        firstName: formData.firstName,
+        lastName: formData.lastName,
+        email: formData.email,
+        phone: formData.phone || null,
+        gender: formData.gender || null,
+        age: formData.age !== '' ? Number(formData.age) : null,
+      });
       onUpdateUser(updatedUser);
       setMessage('Profile updated successfully!');
       setIsEditing(false);
@@ -174,54 +180,40 @@ function Profile({ user, onUpdateUser, onBack }) {
             </div>
 
             <div className='profile-form-section'>
-              <h3 className='profile-section-title'>Address Information</h3>
-              
-              <div className='profile-form-group'>
-                <label className='profile-label'>Street Address</label>
-                {isEditing ? (
-                  <input
-                    type='text'
-                    name='address'
-                    className='profile-input'
-                    value={formData.address}
-                    onChange={handleChange}
-                    placeholder='Enter street address'
-                  />
-                ) : (
-                  <div className='profile-display-value'>{user?.address || 'Not set'}</div>
-                )}
-              </div>
-
+              <h3 className='profile-section-title'>Additional Information</h3>
+            
               <div className='profile-form-row'>
                 <div className='profile-form-group'>
-                  <label className='profile-label'>City</label>
+                  <label className='profile-label'>Gender</label>
                   {isEditing ? (
                     <input
                       type='text'
-                      name='city'
+                      name='gender'
                       className='profile-input'
-                      value={formData.city}
+                      value={formData.gender}
                       onChange={handleChange}
-                      placeholder='Enter city'
+                      placeholder='Enter gender'
                     />
                   ) : (
-                    <div className='profile-display-value'>{user?.city || 'Not set'}</div>
+                    <div className='profile-display-value'>{user?.gender || 'Not set'}</div>
                   )}
                 </div>
 
                 <div className='profile-form-group'>
-                  <label className='profile-label'>Country</label>
+                  <label className='profile-label'>Age</label>
                   {isEditing ? (
                     <input
-                      type='text'
-                      name='country'
+                      type='number'
+                      name='age'
                       className='profile-input'
-                      value={formData.country}
+                      value={formData.age}
                       onChange={handleChange}
-                      placeholder='Enter country'
+                      placeholder='Enter age'
+                      min='0'
+                      max='150'
                     />
                   ) : (
-                    <div className='profile-display-value'>{user?.country || 'Not set'}</div>
+                    <div className='profile-display-value'>{user?.age ?? 'Not set'}</div>
                   )}
                 </div>
               </div>

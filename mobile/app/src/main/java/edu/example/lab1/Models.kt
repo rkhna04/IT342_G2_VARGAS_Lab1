@@ -6,9 +6,8 @@ data class User(
     val lastName: String,
     val email: String,
     val phone: String? = null,
-    val address: String? = null,
-    val city: String? = null,
-    val country: String? = null,
+    val gender: String? = null,
+    val age: Int? = null,
     val createdAt: String? = null
 )
 

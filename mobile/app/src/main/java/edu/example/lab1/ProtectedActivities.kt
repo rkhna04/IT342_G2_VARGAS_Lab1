@@ -1,20 +1,21 @@
 package edu.example.lab1
 
-import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.widget.Button
+import android.widget.EditText
+import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import android.widget.EditText
-import android.widget.ProgressBar
-
 
 class DashboardActivity : AppCompatActivity() {
+
     private lateinit var authManager: AuthManager
     private lateinit var welcomeText: TextView
     private lateinit var profileBtn: Button
@@ -26,7 +27,6 @@ class DashboardActivity : AppCompatActivity() {
 
         authManager = AuthManager(this)
 
-        // Check if user is logged in
         if (!authManager.isLoggedIn()) {
             startActivity(Intent(this, MainActivity::class.java))
             finish()
@@ -47,19 +47,35 @@ class DashboardActivity : AppCompatActivity() {
         }
 
         logoutBtn.setOnClickListener {
-            showLogoutConfirmation()
+            showLogoutDialog()
         }
     }
 
-    private fun showLogoutConfirmation() {
-        AlertDialog.Builder(this)
-            .setTitle("Logout")
-            .setMessage("Are you sure you want to logout?")
-            .setPositiveButton("Yes") { _, _ ->
-                performLogout()
-            }
-            .setNegativeButton("No", null)
-            .show()
+    private fun showLogoutDialog() {
+        val dialogView = LayoutInflater.from(this)
+                .inflate(R.layout.dialog_confirm_logout, null, false)
+
+        val dialog = AlertDialog.Builder(this)
+                .setView(dialogView)
+                .setCancelable(true)
+                .create()
+
+        dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
+        dialog.window?.setDimAmount(0.65f)
+
+        val yesBtn = dialogView.findViewById<Button>(R.id.btnYes)
+        val noBtn = dialogView.findViewById<Button>(R.id.btnNo)
+
+        yesBtn.setOnClickListener {
+            dialog.dismiss()
+            performLogout()
+        }
+
+        noBtn.setOnClickListener {
+            dialog.dismiss()
+        }
+
+        dialog.show()
     }
 
     private fun performLogout() {
@@ -67,11 +83,15 @@ class DashboardActivity : AppCompatActivity() {
             try {
                 ApiClient.authApi.logout()
                 authManager.logout()
-                Toast.makeText(this@DashboardActivity, "Logged out successfully", Toast.LENGTH_SHORT).show()
-                startActivity(Intent(this@DashboardActivity, MainActivity::class.java))
-                finish()
+                Toast.makeText(
+                        this@DashboardActivity,
+                        "Logged out successfully",
+                        Toast.LENGTH_SHORT
+                ).show()
             } catch (e: Exception) {
+                // even if API fails, clear local session
                 authManager.logout()
+            } finally {
                 startActivity(Intent(this@DashboardActivity, MainActivity::class.java))
                 finish()
             }
@@ -80,14 +100,14 @@ class DashboardActivity : AppCompatActivity() {
 }
 
 class ProfileActivity : AppCompatActivity() {
+
     private lateinit var authManager: AuthManager
     private lateinit var firstNameInput: EditText
     private lateinit var lastNameInput: EditText
     private lateinit var emailInput: EditText
     private lateinit var phoneInput: EditText
-    private lateinit var addressInput: EditText
-    private lateinit var cityInput: EditText
-    private lateinit var countryInput: EditText
+    private lateinit var genderInput: EditText
+    private lateinit var ageInput: EditText
     private lateinit var saveBtn: Button
     private lateinit var backBtn: Button
     private lateinit var progressBar: ProgressBar
@@ -113,9 +133,8 @@ class ProfileActivity : AppCompatActivity() {
         lastNameInput = findViewById(R.id.et_last_name)
         emailInput = findViewById(R.id.et_email)
         phoneInput = findViewById(R.id.et_phone)
-        addressInput = findViewById(R.id.et_address)
-        cityInput = findViewById(R.id.et_city)
-        countryInput = findViewById(R.id.et_country)
+        genderInput = findViewById(R.id.et_gender)
+        ageInput = findViewById(R.id.et_age)
         saveBtn = findViewById(R.id.btn_save)
         backBtn = findViewById(R.id.btn_back)
         progressBar = findViewById(R.id.progress_bar)
@@ -139,13 +158,16 @@ class ProfileActivity : AppCompatActivity() {
                         lastNameInput.setText(user.lastName)
                         emailInput.setText(user.email)
                         phoneInput.setText(user.phone ?: "")
-                        addressInput.setText(user.address ?: "")
-                        cityInput.setText(user.city ?: "")
-                        countryInput.setText(user.country ?: "")
+                        genderInput.setText(user.gender ?: "")
+                        ageInput.setText(user.age?.toString() ?: "")
                     }
                 }
             } catch (e: Exception) {
-                Toast.makeText(this@ProfileActivity, "Error loading profile: ${e.message}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                        this@ProfileActivity,
+                        "Error loading profile: ${e.message}",
+                        Toast.LENGTH_SHORT
+                ).show()
             } finally {
                 progressBar.visibility = android.view.View.GONE
             }
@@ -160,36 +182,47 @@ class ProfileActivity : AppCompatActivity() {
         val lastName = lastNameInput.text.toString().trim()
         val email = emailInput.text.toString().trim()
         val phone = phoneInput.text.toString().trim()
-        val address = addressInput.text.toString().trim()
-        val city = cityInput.text.toString().trim()
-        val country = countryInput.text.toString().trim()
+        val gender = genderInput.text.toString().trim()
+        val ageText = ageInput.text.toString().trim()
+        val age = if (ageText.isEmpty()) null else try { ageText.toInt() } catch (e: NumberFormatException) { null }
 
         GlobalScope.launch(Dispatchers.Main) {
             try {
                 val token = authManager.getToken()
                 if (token != null) {
-                    val request = UpdateProfileRequest(
+                        val request = UpdateProfileRequest(
                             firstName = firstName,
                             lastName = lastName,
                             email = email,
                             phone = if (phone.isEmpty()) null else phone,
-                            address = if (address.isEmpty()) null else address,
-                            city = if (city.isEmpty()) null else city,
-                            country = if (country.isEmpty()) null else country
-                    )
+                            gender = if (gender.isEmpty()) null else gender,
+                            age = age
+                        )
 
                     val response = ApiClient.authApi.updateProfile(token, request)
 
                     if (response.status == "success" && response.data != null) {
                         authManager.saveUser(response.data)
-                        Toast.makeText(this@ProfileActivity, "Profile updated successfully", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(
+                                this@ProfileActivity,
+                                "Profile updated successfully",
+                                Toast.LENGTH_SHORT
+                        ).show()
                         finish()
                     } else {
-                        Toast.makeText(this@ProfileActivity, response.message, Toast.LENGTH_SHORT).show()
+                        Toast.makeText(
+                                this@ProfileActivity,
+                                response.message,
+                                Toast.LENGTH_SHORT
+                        ).show()
                     }
                 }
             } catch (e: Exception) {
-                Toast.makeText(this@ProfileActivity, "Error updating profile: ${e.message}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                        this@ProfileActivity,
+                        "Error updating profile: ${e.message}",
+                        Toast.LENGTH_SHORT
+                ).show()
             } finally {
                 progressBar.visibility = android.view.View.GONE
                 saveBtn.isEnabled = true
