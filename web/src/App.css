@@ -1188,9 +1188,19 @@ body {
 }
 
 .profile-form {
-  display: flex;
-  flex-direction: column;
-  gap: 28px;
+  display: block;
+}
+
+.profile-sections {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+@media (max-width: 768px) {
+  .profile-sections {
+    grid-template-columns: 1fr;
+  }
 }
 
 .profile-form-section {

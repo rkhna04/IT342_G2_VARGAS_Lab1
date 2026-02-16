@@ -109,7 +109,8 @@ function Profile({ user, onUpdateUser, onBack }) {
           </div>
 
           <form className='profile-form' onSubmit={handleSubmit}>
-            <div className='profile-form-section'>
+            <div className='profile-sections'>
+              <div className='profile-form-section'>
               <h3 className='profile-section-title'>Personal Information</h3>
               
               <div className='profile-form-row'>
@@ -177,9 +178,9 @@ function Profile({ user, onUpdateUser, onBack }) {
                   <div className='profile-display-value'>{user?.phone || 'Not set'}</div>
                 )}
               </div>
-            </div>
+              </div>
 
-            <div className='profile-form-section'>
+              <div className='profile-form-section'>
               <h3 className='profile-section-title'>Additional Information</h3>
             
               <div className='profile-form-row'>
@@ -216,6 +217,7 @@ function Profile({ user, onUpdateUser, onBack }) {
                     <div className='profile-display-value'>{user?.age ?? 'Not set'}</div>
                   )}
                 </div>
+              </div>
               </div>
             </div>
           </form>
