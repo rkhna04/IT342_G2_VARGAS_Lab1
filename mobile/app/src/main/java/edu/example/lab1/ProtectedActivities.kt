@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageButton
 import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
@@ -17,7 +18,8 @@ import kotlinx.coroutines.launch
 class DashboardActivity : AppCompatActivity() {
 
     private lateinit var authManager: AuthManager
-    private lateinit var welcomeText: TextView
+
+    private lateinit var tvAppTitle: TextView
     private lateinit var profileBtn: Button
     private lateinit var logoutBtn: Button
 
@@ -33,13 +35,14 @@ class DashboardActivity : AppCompatActivity() {
             return
         }
 
-        welcomeText = findViewById(R.id.tv_welcome)
+        tvAppTitle = findViewById(R.id.tv_app_title)
         profileBtn = findViewById(R.id.btn_profile)
         logoutBtn = findViewById(R.id.btn_logout)
 
         val user = authManager.getUser()
         if (user != null) {
-            welcomeText.text = "Hello, ${user.firstName}!"
+            // This is your request:
+            tvAppTitle.text = "Hello,${user.firstName}!"
         }
 
         profileBtn.setOnClickListener {
@@ -53,7 +56,7 @@ class DashboardActivity : AppCompatActivity() {
 
     private fun showLogoutDialog() {
         val dialogView = LayoutInflater.from(this)
-                .inflate(R.layout.dialog_confirm_logout, null)
+                .inflate(R.layout.dialog_confirm_logout, null, false)
 
         val dialog = AlertDialog.Builder(this)
                 .setView(dialogView)
@@ -63,15 +66,12 @@ class DashboardActivity : AppCompatActivity() {
         dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
         dialog.window?.setDimAmount(0.65f)
 
-        val yesBtn = dialogView.findViewById<Button>(R.id.btnYes)
-        val noBtn = dialogView.findViewById<Button>(R.id.btnNo)
-
-        yesBtn.setOnClickListener {
+        dialogView.findViewById<Button>(R.id.btnYes).setOnClickListener {
             dialog.dismiss()
             performLogout()
         }
 
-        noBtn.setOnClickListener {
+        dialogView.findViewById<Button>(R.id.btnNo).setOnClickListener {
             dialog.dismiss()
         }
 
@@ -82,11 +82,11 @@ class DashboardActivity : AppCompatActivity() {
         GlobalScope.launch(Dispatchers.Main) {
             try {
                 ApiClient.authApi.logout()
+            } catch (_: Exception) {
+                // ignore network error; still clear local session
+            } finally {
                 authManager.logout()
                 Toast.makeText(this@DashboardActivity, "Logged out successfully", Toast.LENGTH_SHORT).show()
-            } catch (e: Exception) {
-                authManager.logout()
-            } finally {
                 startActivity(Intent(this@DashboardActivity, MainActivity::class.java))
                 finish()
             }
@@ -136,8 +136,7 @@ class ProfileActivity : AppCompatActivity() {
 
         saveBtn.setOnClickListener { updateProfile() }
         backBtn.setOnClickListener { finish() }
-        // Top bar back button (if present)
-        findViewById<Button?>(R.id.btn_back_top)?.setOnClickListener { finish() }
+
     }
 
     private fun loadUserProfile() {

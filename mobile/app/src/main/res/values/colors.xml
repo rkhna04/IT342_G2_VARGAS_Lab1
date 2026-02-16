@@ -20,7 +20,34 @@
     <color name="text_dark">#333333</color>
     <color name="text_light">#666666</color>
 
+    <!-- Add these -->
+    <color name="text_primary">@color/text_dark</color>
+    <color name="text_secondary">@color/text_light</color>
+
     <!-- Status colors -->
     <color name="error">#B85450</color>
     <color name="success">#6B8E23</color>
+
+    <color name="background2">#FFF6F1</color>
+    <color name="topBar">#FFF9F6</color>
+
+    <color name="textPrimary">#3A2E2A</color>
+    <color name="textSecondary">#8A7D78</color>
+
+    <color name="profilePink">#F3B6C6</color>
+    <color name="border">#E6D9D3</color>
+
+    <color name="cardTint">#FFF2EC</color>
+    <color name="dash">#E7D6CF</color>
+
+    <color name="labelBg">#F7E6DE</color>
+    <color name="logoutCardBg">#FFF6F1</color>
+    <color name="logoutBorder">#E8D8D1</color>
+
+    <color name="logoutTitle">#F2B6C8</color>
+    <color name="logoutText">#7F6F69</color>
+
+    <color name="logoutYes">#B95752</color>
+    <color name="logoutNo">#B690B8</color>
+
 </resources>

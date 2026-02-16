@@ -2,14 +2,20 @@ package edu.example.lab1
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.Html
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ProgressBar
+import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
+
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import android.view.LayoutInflater
+
 
 class MainActivity : AppCompatActivity() {
     private lateinit var authManager: AuthManager
@@ -20,7 +26,6 @@ class MainActivity : AppCompatActivity() {
 
         authManager = AuthManager(this)
 
-        // If user is already logged in, go to dashboard
         if (authManager.isLoggedIn()) {
             startActivity(Intent(this, DashboardActivity::class.java))
             finish()
@@ -41,32 +46,41 @@ class MainActivity : AppCompatActivity() {
 }
 
 class LoginActivity : AppCompatActivity() {
+
     private lateinit var authManager: AuthManager
     private lateinit var emailInput: EditText
     private lateinit var passwordInput: EditText
     private lateinit var loginBtn: Button
     private lateinit var progressBar: ProgressBar
-    private lateinit var switchToRegister: android.widget.TextView
+    private lateinit var switchToRegister: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
         authManager = AuthManager(this)
+
         emailInput = findViewById(R.id.et_email)
         passwordInput = findViewById(R.id.et_password)
         loginBtn = findViewById(R.id.btn_login)
         progressBar = findViewById(R.id.progress_bar)
         switchToRegister = findViewById(R.id.tv_switch_to_register)
 
-        loginBtn.setOnClickListener {
-            performLogin()
-        }
+        loginBtn.setOnClickListener { performLogin() }
+
+        // Pink "Register here" using HTML
+        val htmlText = "Don't have an account? <font color=\"#E8A1C4\"><b>Register here</b></font>"
+        switchToRegister.text = android.text.Html.fromHtml(
+                htmlText,
+                android.text.Html.FROM_HTML_MODE_LEGACY
+        )
 
         switchToRegister.setOnClickListener {
             startActivity(Intent(this, RegisterActivity::class.java))
+            finish()
         }
     }
+
 
     private fun performLogin() {
         val email = emailInput.text.toString().trim()
@@ -87,6 +101,7 @@ class LoginActivity : AppCompatActivity() {
                 if (response.status == "success" && response.data != null) {
                     authManager.saveToken("Bearer ${response.data.token}")
                     authManager.saveUser(response.data.user)
+
                     Toast.makeText(this@LoginActivity, "Login successful", Toast.LENGTH_SHORT).show()
                     startActivity(Intent(this@LoginActivity, DashboardActivity::class.java))
                     finish()
@@ -104,28 +119,41 @@ class LoginActivity : AppCompatActivity() {
 }
 
 class RegisterActivity : AppCompatActivity() {
+
     private lateinit var authManager: AuthManager
     private lateinit var firstNameInput: EditText
     private lateinit var lastNameInput: EditText
     private lateinit var emailInput: EditText
     private lateinit var passwordInput: EditText
+    private lateinit var confirmPasswordInput: EditText
     private lateinit var registerBtn: Button
     private lateinit var progressBar: ProgressBar
+    private lateinit var loginRedirect: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
 
         authManager = AuthManager(this)
+
         firstNameInput = findViewById(R.id.et_first_name)
         lastNameInput = findViewById(R.id.et_last_name)
         emailInput = findViewById(R.id.et_email)
         passwordInput = findViewById(R.id.et_password)
+        confirmPasswordInput = findViewById(R.id.et_confirm_password)
         registerBtn = findViewById(R.id.btn_register)
         progressBar = findViewById(R.id.progress_bar)
+        loginRedirect = findViewById(R.id.tv_login_redirect)
 
-        registerBtn.setOnClickListener {
-            performRegister()
+        registerBtn.setOnClickListener { performRegister() }
+
+        // ✅ Pink "Login here" using HTML
+        val htmlText = "Already have an account? <font color=\"#E8A1C4\"><b>Login here</b></font>"
+        loginRedirect.text = Html.fromHtml(htmlText, Html.FROM_HTML_MODE_LEGACY)
+
+        loginRedirect.setOnClickListener {
+            startActivity(Intent(this, LoginActivity::class.java))
+            finish()
         }
     }
 
@@ -134,14 +162,20 @@ class RegisterActivity : AppCompatActivity() {
         val lastName = lastNameInput.text.toString().trim()
         val email = emailInput.text.toString().trim()
         val password = passwordInput.text.toString()
+        val confirmPassword = confirmPasswordInput.text.toString()
 
-        if (firstName.isEmpty() || lastName.isEmpty() || email.isEmpty() || password.isEmpty()) {
+        if (firstName.isEmpty() || lastName.isEmpty() || email.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
             Toast.makeText(this, "Please fill all fields", Toast.LENGTH_SHORT).show()
             return
         }
 
         if (password.length < 6) {
             Toast.makeText(this, "Password must be at least 6 characters", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        if (password != confirmPassword) {
+            Toast.makeText(this, "Passwords do not match", Toast.LENGTH_SHORT).show()
             return
         }
 
@@ -156,6 +190,7 @@ class RegisterActivity : AppCompatActivity() {
                 if (response.status == "success" && response.data != null) {
                     authManager.saveToken("Bearer ${response.data.token}")
                     authManager.saveUser(response.data.user)
+
                     Toast.makeText(this@RegisterActivity, "Registration successful", Toast.LENGTH_SHORT).show()
                     startActivity(Intent(this@RegisterActivity, DashboardActivity::class.java))
                     finish()

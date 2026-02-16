@@ -1,6 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="320dp"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:padding="22dp"
+    android:background="@drawable/bg_logout_dialog"
+    android:gravity="center_horizontal">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Confirm Logout"
+        android:textStyle="bold"
+        android:textSize="26sp"
+        android:textColor="@color/logoutTitle"
+        android:layout_marginTop="6dp"
+        android:layout_marginBottom="14dp" />
+
+    <TextView
+        android:id="@+id/tvMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Are you sure you want to logout?"
+        android:textSize="15sp"
+        android:textColor="@color/logoutText"
+        android:layout_marginBottom="22dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginBottom="6dp">
+
+        <Button
+            android:id="@+id/btnYes"
+            android:layout_width="120dp"
+            android:layout_height="48dp"
+            android:text="Yes"
+            android:textAllCaps="false"
+            android:textStyle="bold"
+            android:textColor="@android:color/white"
+            android:background="@drawable/bg_btn_yes"
+            android:backgroundTint="@null"
+            app:backgroundTint="@null"
+            android:stateListAnimator="@null"
+            android:layout_marginEnd="14dp"/>
+
+        <Button
+            android:id="@+id/btnNo"
+            android:layout_width="120dp"
+            android:layout_height="48dp"
+            android:text="No"
+            android:textAllCaps="false"
+            android:textStyle="bold"
+            android:textColor="@android:color/white"
+            android:background="@drawable/bg_btn_no"
+            android:backgroundTint="@null"
+            app:backgroundTint="@null"
+            android:stateListAnimator="@null"/>
+
+    </LinearLayout>
+
+</LinearLayout>
