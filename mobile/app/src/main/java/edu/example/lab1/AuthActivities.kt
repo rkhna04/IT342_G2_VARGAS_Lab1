@@ -46,6 +46,7 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var passwordInput: EditText
     private lateinit var loginBtn: Button
     private lateinit var progressBar: ProgressBar
+    private lateinit var switchToRegister: android.widget.TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,9 +57,14 @@ class LoginActivity : AppCompatActivity() {
         passwordInput = findViewById(R.id.et_password)
         loginBtn = findViewById(R.id.btn_login)
         progressBar = findViewById(R.id.progress_bar)
+        switchToRegister = findViewById(R.id.tv_switch_to_register)
 
         loginBtn.setOnClickListener {
             performLogin()
+        }
+
+        switchToRegister.setOnClickListener {
+            startActivity(Intent(this, RegisterActivity::class.java))
         }
     }
 
