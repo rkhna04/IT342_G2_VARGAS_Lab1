@@ -39,7 +39,7 @@ class DashboardActivity : AppCompatActivity() {
 
         val user = authManager.getUser()
         if (user != null) {
-            welcomeText.text = "Welcome, ${user.firstName}!"
+            welcomeText.text = "Hello, ${user.firstName}!"
         }
 
         profileBtn.setOnClickListener {
@@ -53,7 +53,7 @@ class DashboardActivity : AppCompatActivity() {
 
     private fun showLogoutDialog() {
         val dialogView = LayoutInflater.from(this)
-                .inflate(R.layout.dialog_confirm_logout, null, false)
+                .inflate(R.layout.dialog_confirm_logout, null)
 
         val dialog = AlertDialog.Builder(this)
                 .setView(dialogView)
@@ -83,13 +83,8 @@ class DashboardActivity : AppCompatActivity() {
             try {
                 ApiClient.authApi.logout()
                 authManager.logout()
-                Toast.makeText(
-                        this@DashboardActivity,
-                        "Logged out successfully",
-                        Toast.LENGTH_SHORT
-                ).show()
+                Toast.makeText(this@DashboardActivity, "Logged out successfully", Toast.LENGTH_SHORT).show()
             } catch (e: Exception) {
-                // even if API fails, clear local session
                 authManager.logout()
             } finally {
                 startActivity(Intent(this@DashboardActivity, MainActivity::class.java))
@@ -141,6 +136,8 @@ class ProfileActivity : AppCompatActivity() {
 
         saveBtn.setOnClickListener { updateProfile() }
         backBtn.setOnClickListener { finish() }
+        // Top bar back button (if present)
+        findViewById<Button?>(R.id.btn_back_top)?.setOnClickListener { finish() }
     }
 
     private fun loadUserProfile() {

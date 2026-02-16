@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@color/background">
 
-    <!-- Top navigation bar -->
+    <!-- Top bar: title left, back right -->
     <LinearLayout
         android:id="@+id/top_bar"
         android:layout_width="0dp"
@@ -17,35 +17,39 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
-     
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="My Profile"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@color/textPrimary" />
 
+        <Button
+            android:id="@+id/btn_back_top"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Back"
+            android:textSize="14sp"
+            android:backgroundTint="@color/cardTint"
+            android:textColor="@color/textSecondary" />
     </LinearLayout>
 
-    <!-- Centered profile card -->
+    <!-- Centered profile card (static, no scroll) -->
     <LinearLayout
         android:id="@+id/profile_card"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="24dp"
+        android:padding="16dp"
         android:background="@drawable/profile_card_bg"
-        android:elevation="6dp"
         app:layout_constraintTop_toBottomOf="@id/top_bar"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/button_container"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintVertical_bias="0.5"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintWidth_percent="0.9">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="My Profile"
-            android:textSize="26sp"
-            android:textStyle="bold"
-            android:textColor="@color/textPrimary"
-            android:layout_marginBottom="20dp" />
+        app:layout_constraintWidth_percent="0.92">
 
         <!-- Row: First & Last Name -->
         <LinearLayout
@@ -116,7 +120,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginBottom="20dp">
+            android:layout_marginBottom="12dp">
 
             <EditText
                 android:id="@+id/et_gender"
@@ -149,35 +153,42 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:visibility="gone"
-            android:layout_marginBottom="16dp" />
+            android:layout_marginTop="4dp" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+    </LinearLayout>
 
-            <Button
-                android:id="@+id/btn_save"
-                android:layout_width="0dp"
-                android:layout_height="56dp"
-                android:layout_weight="1"
-                android:text="SAVE"
-                android:textSize="14sp"
-                android:background="@color/primary"
-                android:textColor="#FFFFFF"
-                android:layout_marginEnd="8dp" />
+    <!-- Fixed buttons at bottom -->
+    <LinearLayout
+        android:id="@+id/button_container"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="16dp"
+        android:background="@color/background"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
-            <Button
-                android:id="@+id/btn_back"
-                android:layout_width="0dp"
-                android:layout_height="56dp"
-                android:layout_weight="1"
-                android:text="BACK"
-                android:textSize="14sp"
-                android:background="@color/accent"
-                android:textColor="#FFFFFF" />
+        <Button
+            android:id="@+id/btn_save"
+            android:layout_width="0dp"
+            android:layout_height="52dp"
+            android:layout_weight="1"
+            android:layout_marginEnd="10dp"
+            android:text="Save"
+            android:textAllCaps="false"
+            android:backgroundTint="@color/primary"
+            android:textColor="@android:color/white" />
 
-        </LinearLayout>
+        <Button
+            android:id="@+id/btn_back"
+            android:layout_width="0dp"
+            android:layout_height="52dp"
+            android:layout_weight="1"
+            android:text="Back"
+            android:textAllCaps="false"
+            android:backgroundTint="@color/accent"
+            android:textColor="@android:color/white" />
 
     </LinearLayout>
 
