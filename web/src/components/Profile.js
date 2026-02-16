@@ -66,13 +66,13 @@ function Profile({ user, onUpdateUser, onBack }) {
   return (
     <div className='profile-page'>
       <div className='profile-page-nav'>
+        <div className='profile-nav-title'>My Profile</div>
         <button onClick={onBack} className='back-btn'>
           ← Back to Dashboard
         </button>
       </div>
 
       <div className='profile-page-content'>
-        <h1 className='profile-page-title'>My Profile</h1>
         
         {message && <div className='message success-message'>{message}</div>}
         {error && <div className='message error-message'>{error}</div>}
@@ -89,23 +89,6 @@ function Profile({ user, onUpdateUser, onBack }) {
               <p className='profile-email'>{user?.email}</p>
               <p className='profile-id'>ID: {user?.id}</p>
             </div>
-          </div>
-
-          <div className='profile-actions'>
-            {!isEditing ? (
-              <button onClick={() => setIsEditing(true)} className='edit-profile-btn'>
-                Edit Profile
-              </button>
-            ) : (
-              <div className='profile-action-buttons'>
-                <button onClick={handleCancel} className='cancel-btn' disabled={loading}>
-                  Cancel
-                </button>
-                <button onClick={handleSubmit} className='save-btn' disabled={loading}>
-                  {loading ? 'Saving...' : 'Save Changes'}
-                </button>
-              </div>
-            )}
           </div>
 
           <form className='profile-form' onSubmit={handleSubmit}>
@@ -219,6 +202,22 @@ function Profile({ user, onUpdateUser, onBack }) {
                 </div>
               </div>
               </div>
+            </div>
+            <div className='profile-actions'>
+              {!isEditing ? (
+                <button onClick={() => setIsEditing(true)} className='edit-profile-btn'>
+                  Edit Profile
+                </button>
+              ) : (
+                <div className='profile-action-buttons'>
+                  <button onClick={handleCancel} className='cancel-btn' disabled={loading}>
+                    Cancel
+                  </button>
+                  <button onClick={handleSubmit} className='save-btn' disabled={loading}>
+                    {loading ? 'Saving...' : 'Save Changes'}
+                  </button>
+                </div>
+              )}
             </div>
           </form>
         </div>

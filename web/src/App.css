@@ -976,6 +976,17 @@ body {
   padding: 16px 32px;
   box-shadow: 0 2px 8px rgba(62, 39, 35, 0.1);
   border-bottom: 2px solid rgba(139, 111, 71, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.profile-nav-title {
+  color: #ffffff;
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: -0.3px;
+  font-family: 'Playfair Display', serif;
 }
 
 .back-btn {
@@ -1103,7 +1114,7 @@ body {
 .profile-actions {
   display: flex;
   justify-content: flex-end;
-  margin-bottom: 32px;
+  margin-top: 20px;
 }
 
 .profile-action-buttons {
