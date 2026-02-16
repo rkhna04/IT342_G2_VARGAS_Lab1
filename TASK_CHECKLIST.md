@@ -44,8 +44,14 @@
 
 ### Web Integration
 - [x] Web `authService` updated to parse `{ status, message, data }`
-  - **Commit:** (pending)
+  - **Commit:** 630a0648
   - Persists `authToken` and `user` from payload
+
+### Documentation
+- [x] FRS.md updated to a direct Google Docs link
+  - **Commit:** 58ee47d7
+- [x] Added Google Docs reference link in FRS (earlier)
+  - **Commit:** 0f9d70c5
 
 ## IN-PROGRESS
 
