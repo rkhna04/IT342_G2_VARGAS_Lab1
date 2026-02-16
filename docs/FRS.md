@@ -1,5 +1,7 @@
 Functional Requirements Specification (FRS) - Lab 1 (Partial)
 
+https://docs.google.com/document/d/11-kREjkIxfU3frxlZvsAXud2vJRT4l6J/edit?usp=sharing&ouid=114271828034962477720&rtpof=true&sd=true
+
 This file is a placeholder for the FRS PDF content required by the lab. Replace or expand this document and export as PDF into this folder as `FRS.pdf` when diagrams and screenshots are ready.
 
 Sections to include in the final FRS PDF:
