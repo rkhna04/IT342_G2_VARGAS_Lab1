@@ -47,6 +47,24 @@
   - **Commit:** 630a0648
   - Persists `authToken` and `user` from payload
 
+### Web Profile Layout (Feb 17, 2026)
+- [x] Make Profile page non-scrollable (preserve layout)
+  - **Commit:** 640ebfe5
+- [x] Side-by-side sections: Personal vs Additional Information
+  - **Commit:** e44c8557
+- [x] Header bar: "My Profile" left, "Back to Dashboard" right; actions moved below Additional
+  - **Commit:** 45a5c006
+
+### Backend Profile Fields (Feb 17, 2026)
+- [x] Add `gender` (String) and `age` (Integer) to `User` entity
+  - **Commit:** 0d010ec5, 49a5f89a
+- [x] Introduce `UpdateProfileRequest` DTO and persist `gender`/`age`
+  - **Commit:** d2036d2b
+
+### Mobile Profile Layout (Feb 17, 2026)
+- [x] Fix `activity_profile.xml` to static card, header title + back, side-by-side input pairs
+  - **Commit:** bb484a2c
+
 ### Documentation
 - [x] FRS.md updated to a direct Google Docs link
   - **Commit:** 58ee47d7
@@ -86,10 +104,14 @@
 
 ### Database Schema
 ```
-users table:
+users table (current fields):
 - id (BIGINT, PRIMARY, AUTO_INCREMENT)
 - firstName, lastName, email (UNIQUE), password (BCRYPT)
-- phone, address, city, country
+- phone
+- gender (STRING), age (INT)
+
+Notes:
+- address/city/country are deprecated in code paths; DB columns may exist if created earlier.
 ```
 
 ### API Endpoints
@@ -98,21 +120,20 @@ users table:
 | POST | /api/auth/register | Register new user | No |
 | POST | /api/auth/login | Login user | No |
 | GET | /api/user/me | Get user profile | Yes (JWT) |
-| PUT | /api/user/me | Update user profile | Yes (JWT) |
+| PUT | /api/user/profile | Update user profile | Yes (JWT) |
 
-## Current Theme: Minimalist Brown
-- Primary: #8B6F47 (Warm Brown)
-- Secondary: #5D4E37 (Dark Brown)
-- Accent: #C17855 (Terracotta)
-- Highlight: #D4A574 (Tan)
-- Danger: #B85450 (Muted Red)
-- Success: #6B8E23 (Olive Green)
-- Background: #FAF8F5 (Warm Cream)
+## Current Theme: Beauty Palette (Playfair + Poppins)
+- Headings Font: Playfair Display
+- Body Font: Poppins
+- Blush Pink: #F8C8DC
+- Nude Beige: #F5E6DA
+- Cream: #FFF8F0
+- Soft Mauve: #C38EB4
+- Light Gray: #EAEAEA
 
 ### Running the Application
 
-**Start Backend** (from workspace root):
-``Backend** (port 8081):
+**Start Backend** (port 8081):
 ```bash
 cd backend
 mvn spring-boot:run
@@ -125,8 +146,17 @@ npm install
 npm start
 ```
 
-**Database**: MySQL on 127.0.0.1:3306, database: `lab1_db`
+**Database**: MySQL on 127.0.0.1:3306, database: `test`
 ---
 
-**Last Updated:** February 9, 2026
-**Status:** Lab 1 - Backend & Web Frontend Implementation
+**Last Updated:** February 17, 2026
+**Status:** Lab 1 - Backend, Web & Mobile updates committed (small info)
+
+## Daily Log
+
+### February 17, 2026
+- Web: Profile page set to non-scroll; sections aligned side-by-side; header/title and back positioned as requested.
+- Backend: Added `gender` and `age` fields; introduced `UpdateProfileRequest` DTO; ensured persistence and retrieval via `/api/user/me` and `/api/user/profile`.
+- Mobile: Fixed `activity_profile.xml` to static layout; added top header with title and back; side-by-side input pairs including Gender/Age.
+- Theme: Applied Playfair Display (headings) and Poppins (body) with Beauty palette.
+- Commits: All updates labeled "small info" and pushed.
