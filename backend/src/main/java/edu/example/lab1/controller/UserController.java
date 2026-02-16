@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import edu.example.lab1.model.User;
+import edu.example.lab1.dto.UpdateProfileRequest;
 import edu.example.lab1.repository.UserRepository;
 import edu.example.lab1.util.JwtUtil;
 import io.jsonwebtoken.Claims;
@@ -81,7 +82,7 @@ public class UserController {
     }
 
     @PutMapping("/profile")
-    public ResponseEntity<?> updateProfile(@RequestHeader(value = "Authorization", required = false) String auth, @RequestBody Map<String, String> body) {
+    public ResponseEntity<?> updateProfile(@RequestHeader(value = "Authorization", required = false) String auth, @RequestBody UpdateProfileRequest body) {
         String token = extractToken(auth);
         if (token == null) {
             return ResponseEntity.status(401).body(buildApiResponse("error", "Unauthorized: Missing or invalid token", null));
@@ -103,14 +104,14 @@ public class UserController {
             User u = opt.get();
 
             // Validate and update fields
-            if (body.containsKey("firstName") && body.get("firstName") != null) {
-                u.setFirstName(body.get("firstName").trim());
+            if (body.getFirstName() != null) {
+                u.setFirstName(body.getFirstName().trim());
             }
-            if (body.containsKey("lastName") && body.get("lastName") != null) {
-                u.setLastName(body.get("lastName").trim());
+            if (body.getLastName() != null) {
+                u.setLastName(body.getLastName().trim());
             }
-            if (body.containsKey("email") && body.get("email") != null) {
-                String newEmail = body.get("email").toLowerCase().trim();
+            if (body.getEmail() != null) {
+                String newEmail = body.getEmail().toLowerCase().trim();
                 if (!newEmail.matches("^[A-Za-z0-9+_.-]+@(.+)$")) {
                     return ResponseEntity.badRequest().body(buildApiResponse("error", "Invalid email format", null));
                 }
@@ -121,26 +122,19 @@ public class UserController {
                 }
                 u.setEmail(newEmail);
             }
-            if (body.containsKey("phone") && body.get("phone") != null) {
-                u.setPhone(body.get("phone").trim());
+            if (body.getPhone() != null) {
+                u.setPhone(body.getPhone().trim());
             }
             // New fields
-            if (body.containsKey("gender") && body.get("gender") != null) {
-                u.setGender(body.get("gender").trim());
+            if (body.getGender() != null) {
+                u.setGender(body.getGender().trim());
             }
-            if (body.containsKey("age") && body.get("age") != null) {
-                try {
-                    String ageStr = body.get("age").trim();
-                    if (!ageStr.isEmpty()) {
-                        Integer age = Integer.parseInt(ageStr);
-                        if (age < 0 || age > 150) {
-                            return ResponseEntity.badRequest().body(buildApiResponse("error", "Invalid age value", null));
-                        }
-                        u.setAge(age);
-                    }
-                } catch (NumberFormatException ex) {
-                    return ResponseEntity.badRequest().body(buildApiResponse("error", "Age must be a number", null));
+            if (body.getAge() != null) {
+                Integer age = body.getAge();
+                if (age < 0 || age > 150) {
+                    return ResponseEntity.badRequest().body(buildApiResponse("error", "Invalid age value", null));
                 }
+                u.setAge(age);
             }
 
             userRepository.save(u);
