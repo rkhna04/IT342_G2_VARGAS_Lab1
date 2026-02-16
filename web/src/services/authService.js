@@ -20,18 +20,19 @@ export const authService = {
       const text = await response.text();
       console.log("Registration response status:", response.status);
       console.log("Registration response text:", text);
-      let data;
+      let wrapper;
       try {
-        data = JSON.parse(text);
+        wrapper = JSON.parse(text);
       } catch (e) {
         throw new Error("Server returned invalid JSON response");
       }
 
-      if (!response.ok) {
-        throw new Error(data.message || "Registration failed");
+      if (!response.ok || wrapper.status !== "success") {
+        throw new Error(wrapper.message || "Registration failed");
       }
 
-      return data;
+      // Backend wraps payload under `data`
+      return wrapper.data;
     } catch (error) {
       console.error("Registration error:", error);
       throw error;
@@ -55,23 +56,25 @@ export const authService = {
       const text = await response.text();
       console.log("Login response status:", response.status);
       console.log("Login response text:", text);
-      let data;
+      let wrapper;
       try {
-        data = JSON.parse(text);
+        wrapper = JSON.parse(text);
       } catch (e) {
         throw new Error("Server returned invalid JSON response");
       }
 
-      if (!response.ok) {
-        throw new Error(data.message || "Login failed");
+      if (!response.ok || wrapper.status !== "success") {
+        throw new Error(wrapper.message || "Login failed");
       }
 
-      if (data.token && data.user) {
-        localStorage.setItem("authToken", data.token);
-        localStorage.setItem("user", JSON.stringify(data.user));
+      const payload = wrapper.data || {};
+      if (payload.token && payload.user) {
+        localStorage.setItem("authToken", payload.token);
+        localStorage.setItem("user", JSON.stringify(payload.user));
       }
 
-      return data;
+      // Return payload directly for component consumption
+      return payload;
     } catch (error) {
       console.error("Login error:", error);
       throw error;
@@ -92,18 +95,18 @@ export const authService = {
       const text = await response.text();
       console.log("GetUser response status:", response.status);
       console.log("GetUser response text:", text);
-      let data;
+      let wrapper;
       try {
-        data = JSON.parse(text);
+        wrapper = JSON.parse(text);
       } catch (e) {
         throw new Error("Server returned invalid JSON response");
       }
 
-      if (!response.ok) {
-        throw new Error(data.message || "Failed to fetch user");
+      if (!response.ok || wrapper.status !== "success") {
+        throw new Error(wrapper.message || "Failed to fetch user");
       }
 
-      return data;
+      return wrapper.data;
     } catch (error) {
       console.error("GetUser error:", error);
       throw error;
@@ -130,21 +133,22 @@ export const authService = {
       const text = await response.text();
       console.log("Update profile response status:", response.status);
       console.log("Update profile response text:", text);
-      let data;
+      let wrapper;
       try {
-        data = JSON.parse(text);
+        wrapper = JSON.parse(text);
       } catch (e) {
         throw new Error("Server returned invalid JSON response");
       }
 
-      if (!response.ok) {
-        throw new Error(data.message || "Failed to update profile");
+      if (!response.ok || wrapper.status !== "success") {
+        throw new Error(wrapper.message || "Failed to update profile");
       }
 
+      const user = wrapper.data;
       // Update local storage with new user data
-      localStorage.setItem("user", JSON.stringify(data));
+      localStorage.setItem("user", JSON.stringify(user));
 
-      return data;
+      return user;
     } catch (error) {
       console.error("Update profile error:", error);
       throw error;

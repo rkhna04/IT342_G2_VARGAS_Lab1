@@ -28,11 +28,30 @@
   - Added .gitignore for build artifacts
   - Removed unnecessary files (target/, node_modules/, temp docs)
 
+### Mobile (Android Kotlin)
+- [x] Implemented Register, Login, Dashboard, Profile (protected), Logout
+  - **Commit:** (pending)
+  - Uses Retrofit + OkHttp + Coroutines
+  - Stores `token` and `user` via `AuthManager` (SharedPreferences)
+  - Connects to same backend API (`http://10.0.2.2:8081/api` in emulator)
+  - Protected screens redirect to login when logged out
+
+### Backend Finalization
+- [x] Logout endpoint `/api/auth/logout` (stateless JWT logout)
+  - **Commit:** (pending)
+- [x] Consistent response wrapper `{ status, message, data }`
+- [x] Validation for email format, password length (BCrypt hashing)
+
+### Web Integration
+- [x] Web `authService` updated to parse `{ status, message, data }`
+  - **Commit:** (pending)
+  - Persists `authToken` and `user` from payload
+
 ## IN-PROGRESS
 
 ### Documentation
-- [ ] Take screenshots of Register, Login, Dashboard, Profile pages
-- [ ] Create FRS PDF with web screenshots
+- [ ] Take screenshots of BOTH Web and Mobile (Register, Login, Dashboard, Profile, Logout)
+- [ ] Update FRS.md and export FRS.pdf under `/docs` with screenshots and any diagram revisions
 
 ## TODO
 
