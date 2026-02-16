@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.Lab1Mobile" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+        <item name="colorPrimary">#8B6F47</item>
+        <item name="colorPrimaryVariant">#5D4E37</item>
+        <item name="colorSecondary">#C17855</item>
+        <item name="colorSecondaryVariant">#D4A574</item>
+        <item name="android:colorBackground">#FAF8F5</item>
+        <item name="colorError">#B85450</item>
+    </style>
+</resources>

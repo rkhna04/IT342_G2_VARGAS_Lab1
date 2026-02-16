@@ -1,18 +1,26 @@
 package edu.example.lab1.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 import edu.example.lab1.model.User;
 import edu.example.lab1.repository.UserRepository;
 import edu.example.lab1.util.JwtUtil;
 import io.jsonwebtoken.Claims;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.Map;
 
 @RestController
 @RequestMapping("/api/user")
-@CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true", maxAge = 3600)
+@CrossOrigin(origins = {"http://localhost:3000", "http://localhost:3001"}, allowCredentials = "true", maxAge = 3600)
 public class UserController {
     private final UserRepository userRepository;
     private final JwtUtil jwtUtil;
@@ -22,73 +30,127 @@ public class UserController {
         this.jwtUtil = new JwtUtil(jwtSecret);
     }
 
+    private Map<String, Object> buildApiResponse(String status, String message, Object data) {
+        Map<String, Object> resp = new HashMap<>();
+        resp.put("status", status);
+        resp.put("message", message);
+        if (data != null) resp.put("data", data);
+        return resp;
+    }
+
+    private String extractToken(String auth) {
+        if (auth == null || !auth.startsWith("Bearer ")) return null;
+        return auth.substring(7);
+    }
+
     @GetMapping("/me")
     public ResponseEntity<?> me(@RequestHeader(value = "Authorization", required = false) String auth) {
-        if (auth == null || !auth.startsWith("Bearer ")) return ResponseEntity.status(401).body(Map.of("message", "Unauthorized"));
-        String token = auth.substring(7);
+        String token = extractToken(auth);
+        if (token == null) {
+            return ResponseEntity.status(401).body(buildApiResponse("error", "Unauthorized: Missing or invalid token", null));
+        }
+
         try {
             Claims claims = jwtUtil.parseToken(token);
             Number idn = (Number) claims.get("id");
-            if (idn == null) return ResponseEntity.status(401).body(Map.of("message", "Invalid token"));
+            if (idn == null) {
+                return ResponseEntity.status(401).body(buildApiResponse("error", "Invalid token", null));
+            }
+
             Long id = idn.longValue();
             var opt = userRepository.findById(id);
-            if (opt.isEmpty()) return ResponseEntity.status(404).body(Map.of("message", "User not found"));
+            if (opt.isEmpty()) {
+                return ResponseEntity.status(404).body(buildApiResponse("error", "User not found", null));
+            }
+
             User u = opt.get();
-            Map<String, Object> out = Map.of(
-                "id", u.getId(), 
-                "firstName", u.getFirstName(), 
-                "lastName", u.getLastName(), 
-                "email", u.getEmail(), 
-                "phone", u.getPhone() != null ? u.getPhone() : "",
-                "address", u.getAddress() != null ? u.getAddress() : "",
-                "city", u.getCity() != null ? u.getCity() : "",
-                "country", u.getCountry() != null ? u.getCountry() : "",
-                "created_at", u.getCreatedAt()
-            );
-            return ResponseEntity.ok(out);
+            Map<String, Object> userData = new HashMap<>();
+            userData.put("id", u.getId());
+            userData.put("firstName", u.getFirstName());
+            userData.put("lastName", u.getLastName());
+            userData.put("email", u.getEmail());
+            userData.put("phone", u.getPhone() != null ? u.getPhone() : "");
+            userData.put("address", u.getAddress() != null ? u.getAddress() : "");
+            userData.put("city", u.getCity() != null ? u.getCity() : "");
+            userData.put("country", u.getCountry() != null ? u.getCountry() : "");
+            userData.put("createdAt", u.getCreatedAt());
+
+            return ResponseEntity.ok(buildApiResponse("success", "User profile retrieved", userData));
         } catch (Exception e) {
-            return ResponseEntity.status(401).body(Map.of("message", "Invalid token"));
+            return ResponseEntity.status(401).body(buildApiResponse("error", "Invalid or expired token", null));
         }
     }
 
     @PutMapping("/profile")
-    @SuppressWarnings("null")
     public ResponseEntity<?> updateProfile(@RequestHeader(value = "Authorization", required = false) String auth, @RequestBody Map<String, String> body) {
-        if (auth == null || !auth.startsWith("Bearer ")) return ResponseEntity.status(401).body(Map.of("message", "Unauthorized"));
-        String token = auth.substring(7);
+        String token = extractToken(auth);
+        if (token == null) {
+            return ResponseEntity.status(401).body(buildApiResponse("error", "Unauthorized: Missing or invalid token", null));
+        }
+
         try {
             Claims claims = jwtUtil.parseToken(token);
             Number idn = (Number) claims.get("id");
-            if (idn == null) return ResponseEntity.status(401).body(Map.of("message", "Invalid token"));
+            if (idn == null) {
+                return ResponseEntity.status(401).body(buildApiResponse("error", "Invalid token", null));
+            }
+
             Long id = idn.longValue();
             var opt = userRepository.findById(id);
-            if (opt.isEmpty()) return ResponseEntity.status(404).body(Map.of("message", "User not found"));
-            
+            if (opt.isEmpty()) {
+                return ResponseEntity.status(404).body(buildApiResponse("error", "User not found", null));
+            }
+
             User u = opt.get();
-            if (body.containsKey("firstName")) u.setFirstName(body.get("firstName"));
-            if (body.containsKey("lastName")) u.setLastName(body.get("lastName"));
-            if (body.containsKey("email")) u.setEmail(body.get("email"));
-            if (body.containsKey("phone")) u.setPhone(body.get("phone"));
-            if (body.containsKey("address")) u.setAddress(body.get("address"));
-            if (body.containsKey("city")) u.setCity(body.get("city"));
-            if (body.containsKey("country")) u.setCountry(body.get("country"));
-            
+
+            // Validate and update fields
+            if (body.containsKey("firstName") && body.get("firstName") != null) {
+                u.setFirstName(body.get("firstName").trim());
+            }
+            if (body.containsKey("lastName") && body.get("lastName") != null) {
+                u.setLastName(body.get("lastName").trim());
+            }
+            if (body.containsKey("email") && body.get("email") != null) {
+                String newEmail = body.get("email").toLowerCase().trim();
+                if (!newEmail.matches("^[A-Za-z0-9+_.-]+@(.+)$")) {
+                    return ResponseEntity.badRequest().body(buildApiResponse("error", "Invalid email format", null));
+                }
+                // Check if email already exists (and is not the same user)
+                var existingUser = userRepository.findByEmail(newEmail);
+                if (existingUser.isPresent() && !existingUser.get().getId().equals(id)) {
+                    return ResponseEntity.badRequest().body(buildApiResponse("error", "Email already in use", null));
+                }
+                u.setEmail(newEmail);
+            }
+            if (body.containsKey("phone") && body.get("phone") != null) {
+                u.setPhone(body.get("phone").trim());
+            }
+            if (body.containsKey("address") && body.get("address") != null) {
+                u.setAddress(body.get("address").trim());
+            }
+            if (body.containsKey("city") && body.get("city") != null) {
+                u.setCity(body.get("city").trim());
+            }
+            if (body.containsKey("country") && body.get("country") != null) {
+                u.setCountry(body.get("country").trim());
+            }
+
             userRepository.save(u);
-            
-            Map<String, Object> out = Map.of(
-                "id", u.getId(), 
-                "firstName", u.getFirstName(), 
-                "lastName", u.getLastName(), 
-                "email", u.getEmail(), 
-                "phone", u.getPhone() != null ? u.getPhone() : "",
-                "address", u.getAddress() != null ? u.getAddress() : "",
-                "city", u.getCity() != null ? u.getCity() : "",
-                "country", u.getCountry() != null ? u.getCountry() : "",
-                "created_at", u.getCreatedAt()
-            );
-            return ResponseEntity.ok(out);
+
+            Map<String, Object> userData = new HashMap<>();
+            userData.put("id", u.getId());
+            userData.put("firstName", u.getFirstName());
+            userData.put("lastName", u.getLastName());
+            userData.put("email", u.getEmail());
+            userData.put("phone", u.getPhone() != null ? u.getPhone() : "");
+            userData.put("address", u.getAddress() != null ? u.getAddress() : "");
+            userData.put("city", u.getCity() != null ? u.getCity() : "");
+            userData.put("country", u.getCountry() != null ? u.getCountry() : "");
+            userData.put("createdAt", u.getCreatedAt());
+
+            return ResponseEntity.ok(buildApiResponse("success", "Profile updated successfully", userData));
         } catch (Exception e) {
-            return ResponseEntity.status(401).body(Map.of("message", "Invalid token"));
+            return ResponseEntity.status(401).body(buildApiResponse("error", "Invalid or expired token", null));
         }
     }
 }
