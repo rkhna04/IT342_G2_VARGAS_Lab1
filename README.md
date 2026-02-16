@@ -80,4 +80,4 @@ POST /api/auth/register
 This project is for educational purposes - IT342 Lab 1
 
 ---
-**Last Updated:** February 9, 2026
+**Last Updated:** February 17, 2026
