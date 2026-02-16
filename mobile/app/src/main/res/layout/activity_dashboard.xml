@@ -5,7 +5,7 @@
     android:orientation="vertical"
     android:padding="24dp"
     android:gravity="center"
-    android:background="#FAF8F5">
+    android:background="@color/background">
 
     <TextView
         android:id="@+id/tv_welcome"
@@ -14,7 +14,7 @@
         android:text="Welcome!"
         android:textSize="32sp"
         style="@style/TextHeading"
-        android:textColor="#5D4E37"
+        android:textColor="@color/primary"
         android:layout_marginBottom="48dp" />
 
     <Button
@@ -24,7 +24,7 @@
         android:text="View/Edit Profile"
         android:textSize="16sp"
         android:fontFamily="@font/poppins"
-        android:background="#8B6F47"
+        android:background="@color/primary"
         android:textColor="#FFFFFF"
         android:layout_marginBottom="16dp" />
 
@@ -35,7 +35,7 @@
         android:text="LOGOUT"
         android:textSize="16sp"
         android:fontFamily="@font/poppins"
-        android:background="#B85450"
+        android:background="@color/accent"
         android:textColor="#FFFFFF" />
 
 </LinearLayout>
