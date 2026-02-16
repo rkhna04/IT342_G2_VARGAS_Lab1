@@ -1,0 +1,3 @@
+edu.example.lab1.test
+style WhiteBackgroundDialogTheme
+style WhiteBackgroundTheme

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="accent">#C17855</color>
+    <color name="accent_light">#D4A574</color>
+    <color name="background">#FAF8F5</color>
+    <color name="error">#B85450</color>
+    <color name="primary">#8B6F47</color>
+    <color name="primary_dark">#5D4E37</color>
+    <color name="success">#6B8E23</color>
+    <color name="text_dark">#333333</color>
+    <color name="text_light">#666666</color>
+    <string name="address">Address</string>
+    <string name="app_name">Lab1Mobile</string>
+    <string name="city">City</string>
+    <string name="country">Country</string>
+    <string name="email">Email</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="login">Login</string>
+    <string name="logout">Logout</string>
+    <string name="password">Password</string>
+    <string name="phone">Phone</string>
+    <string name="register">Register</string>
+    <string name="welcome">Welcome</string>
+    <style name="TextBody">
+        <item name="android:fontFamily">@font/poppins</item>
+    </style>
+    <style name="TextHeading">
+        <item name="android:fontFamily">@font/playfair_display</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="Theme.Lab1Mobile" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+        <item name="colorPrimary">#8B6F47</item>
+        <item name="colorPrimaryVariant">#5D4E37</item>
+        <item name="colorSecondary">#C17855</item>
+        <item name="colorSecondaryVariant">#D4A574</item>
+        <item name="android:colorBackground">#FAF8F5</item>
+        <item name="colorError">#B85450</item>
+        <item name="android:fontFamily">@font/poppins</item>
+    </style>
+</resources>

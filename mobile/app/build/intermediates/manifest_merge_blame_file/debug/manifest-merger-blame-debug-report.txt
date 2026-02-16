@@ -1,0 +1,134 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="edu.example.lab1"
+4    android:versionCode="1"
+5    android:versionName="1.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="26"
+8-->C:\Users\VARGAS\IT342_G2_VARGAS_Lab1\mobile\app\src\main\AndroidManifest.xml
+9        android:targetSdkVersion="34" />
+9-->C:\Users\VARGAS\IT342_G2_VARGAS_Lab1\mobile\app\src\main\AndroidManifest.xml
+10
+11    <uses-permission android:name="android.permission.INTERNET" />
+11-->C:\Users\VARGAS\IT342_G2_VARGAS_Lab1\mobile\app\src\main\AndroidManifest.xml:5:5-67
+11-->C:\Users\VARGAS\IT342_G2_VARGAS_Lab1\mobile\app\src\main\AndroidManifest.xml:5:22-64
+12    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+12-->C:\Users\VARGAS\IT342_G2_VARGAS_Lab1\mobile\app\src\main\AndroidManifest.xml:6:5-79
+12-->C:\Users\VARGAS\IT342_G2_VARGAS_Lab1\mobile\app\src\main\AndroidManifest.xml:6:22-76
+13
+14    <permission
+14-->[androidx.core:core:1.10.1] C:\Users\VARGAS\.gradle\caches\transforms-3\96b9042ef601d3ec6c00c2a31c1e327d\transformed\core-1.10.1\AndroidManifest.xml:22:5-24:47
+15        android:name="edu.example.lab1.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+15-->[androidx.core:core:1.10.1] C:\Users\VARGAS\.gradle\caches\transforms-3\96b9042ef601d3ec6c00c2a31c1e327d\transformed\core-1.10.1\AndroidManifest.xml:23:9-81
+16        android:protectionLevel="signature" />
+16-->[androidx.core:core:1.10.1] C:\Users\VARGAS\.gradle\caches\transforms-3\96b9042ef601d3ec6c00c2a31c1e327d\transformed\core-1.10.1\AndroidManifest.xml:24:9-44
+17
+18    <uses-permission android:name="edu.example.lab1.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
+18-->[androidx.core:core:1.10.1] C:\Users\VARGAS\.gradle\caches\transforms-3\96b9042ef601d3ec6c00c2a31c1e327d\transformed\core-1.10.1\AndroidManifest.xml:26:5-97
+18-->[androidx.core:core:1.10.1] C:\Users\VARGAS\.gradle\caches\transforms-3\96b9042ef601d3ec6c00c2a31c1e327d\transformed\core-1.10.1\AndroidManifest.xml:26:22-94
+19
+20    <application
+20-->C:\Users\VARGAS\IT342_G2_VARGAS_Lab1\mobile\app\src\main\AndroidManifest.xml:8:5-45:19
+21        android:allowBackup="true"
+21-->C:\Users\VARGAS\IT342_G2_VARGAS_Lab1\mobile\app\src\main\AndroidManifest.xml:9:9-35
+22        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+22-->[androidx.core:core:1.10.1] C:\Users\VARGAS\.gradle\caches\transforms-3\96b9042ef601d3ec6c00c2a31c1e327d\transformed\core-1.10.1\AndroidManifest.xml:28:18-86
+23        android:dataExtractionRules="@xml/data_extraction_rules"
+23-->C:\Users\VARGAS\IT342_G2_VARGAS_Lab1\mobile\app\src\main\AndroidManifest.xml:12:9-65
+24        android:debuggable="true"
+25        android:extractNativeLibs="false"
+26        android:fullBackupContent="@xml/backup_rules"
+26-->C:\Users\VARGAS\IT342_G2_VARGAS_Lab1\mobile\app\src\main\AndroidManifest.xml:13:9-54
+27        android:icon="@mipmap/ic_launcher"
+27-->C:\Users\VARGAS\IT342_G2_VARGAS_Lab1\mobile\app\src\main\AndroidManifest.xml:14:9-43
+28        android:label="@string/app_name"
+28-->C:\Users\VARGAS\IT342_G2_VARGAS_Lab1\mobile\app\src\main\AndroidManifest.xml:15:9-41
+29        android:networkSecurityConfig="@xml/network_security_config"
+29-->C:\Users\VARGAS\IT342_G2_VARGAS_Lab1\mobile\app\src\main\AndroidManifest.xml:11:9-69
+30        android:supportsRtl="true"
+30-->C:\Users\VARGAS\IT342_G2_VARGAS_Lab1\mobile\app\src\main\AndroidManifest.xml:16:9-35
+31        android:testOnly="true"
+32        android:theme="@style/Theme.Lab1Mobile"
+32-->C:\Users\VARGAS\IT342_G2_VARGAS_Lab1\mobile\app\src\main\AndroidManifest.xml:17:9-48
+33        android:usesCleartextTraffic="true" >
+33-->C:\Users\VARGAS\IT342_G2_VARGAS_Lab1\mobile\app\src\main\AndroidManifest.xml:10:9-44
+34        <activity
+34-->C:\Users\VARGAS\IT342_G2_VARGAS_Lab1\mobile\app\src\main\AndroidManifest.xml:20:9-27:20
+35            android:name="edu.example.lab1.MainActivity"
+35-->C:\Users\VARGAS\IT342_G2_VARGAS_Lab1\mobile\app\src\main\AndroidManifest.xml:21:13-41
+36            android:exported="true" >
+36-->C:\Users\VARGAS\IT342_G2_VARGAS_Lab1\mobile\app\src\main\AndroidManifest.xml:22:13-36
+37            <intent-filter>
+37-->C:\Users\VARGAS\IT342_G2_VARGAS_Lab1\mobile\app\src\main\AndroidManifest.xml:23:13-26:29
+38                <action android:name="android.intent.action.MAIN" />
+38-->C:\Users\VARGAS\IT342_G2_VARGAS_Lab1\mobile\app\src\main\AndroidManifest.xml:24:17-69
+38-->C:\Users\VARGAS\IT342_G2_VARGAS_Lab1\mobile\app\src\main\AndroidManifest.xml:24:25-66
+39
+40                <category android:name="android.intent.category.LAUNCHER" />
+40-->C:\Users\VARGAS\IT342_G2_VARGAS_Lab1\mobile\app\src\main\AndroidManifest.xml:25:17-77
+40-->C:\Users\VARGAS\IT342_G2_VARGAS_Lab1\mobile\app\src\main\AndroidManifest.xml:25:27-74
+41            </intent-filter>
+42        </activity>
+43        <activity
+43-->C:\Users\VARGAS\IT342_G2_VARGAS_Lab1\mobile\app\src\main\AndroidManifest.xml:29:9-31:40
+44            android:name="edu.example.lab1.LoginActivity"
+44-->C:\Users\VARGAS\IT342_G2_VARGAS_Lab1\mobile\app\src\main\AndroidManifest.xml:30:13-42
+45            android:exported="false" />
+45-->C:\Users\VARGAS\IT342_G2_VARGAS_Lab1\mobile\app\src\main\AndroidManifest.xml:31:13-37
+46        <activity
+46-->C:\Users\VARGAS\IT342_G2_VARGAS_Lab1\mobile\app\src\main\AndroidManifest.xml:33:9-35:40
+47            android:name="edu.example.lab1.RegisterActivity"
+47-->C:\Users\VARGAS\IT342_G2_VARGAS_Lab1\mobile\app\src\main\AndroidManifest.xml:34:13-45
+48            android:exported="false" />
+48-->C:\Users\VARGAS\IT342_G2_VARGAS_Lab1\mobile\app\src\main\AndroidManifest.xml:35:13-37
+49        <activity
+49-->C:\Users\VARGAS\IT342_G2_VARGAS_Lab1\mobile\app\src\main\AndroidManifest.xml:37:9-39:40
+50            android:name="edu.example.lab1.DashboardActivity"
+50-->C:\Users\VARGAS\IT342_G2_VARGAS_Lab1\mobile\app\src\main\AndroidManifest.xml:38:13-46
+51            android:exported="false" />
+51-->C:\Users\VARGAS\IT342_G2_VARGAS_Lab1\mobile\app\src\main\AndroidManifest.xml:39:13-37
+52        <activity
+52-->C:\Users\VARGAS\IT342_G2_VARGAS_Lab1\mobile\app\src\main\AndroidManifest.xml:41:9-43:40
+53            android:name="edu.example.lab1.ProfileActivity"
+53-->C:\Users\VARGAS\IT342_G2_VARGAS_Lab1\mobile\app\src\main\AndroidManifest.xml:42:13-44
+54            android:exported="false" />
+54-->C:\Users\VARGAS\IT342_G2_VARGAS_Lab1\mobile\app\src\main\AndroidManifest.xml:43:13-37
+55
+56        <uses-library
+56-->[androidx.window:window:1.0.0] C:\Users\VARGAS\.gradle\caches\transforms-3\1e39bafb4c4ac422fc08d4a6a96fb9a8\transformed\jetified-window-1.0.0\AndroidManifest.xml:25:9-27:40
+57            android:name="androidx.window.extensions"
+57-->[androidx.window:window:1.0.0] C:\Users\VARGAS\.gradle\caches\transforms-3\1e39bafb4c4ac422fc08d4a6a96fb9a8\transformed\jetified-window-1.0.0\AndroidManifest.xml:26:13-54
+58            android:required="false" />
+58-->[androidx.window:window:1.0.0] C:\Users\VARGAS\.gradle\caches\transforms-3\1e39bafb4c4ac422fc08d4a6a96fb9a8\transformed\jetified-window-1.0.0\AndroidManifest.xml:27:13-37
+59        <uses-library
+59-->[androidx.window:window:1.0.0] C:\Users\VARGAS\.gradle\caches\transforms-3\1e39bafb4c4ac422fc08d4a6a96fb9a8\transformed\jetified-window-1.0.0\AndroidManifest.xml:28:9-30:40
+60            android:name="androidx.window.sidecar"
+60-->[androidx.window:window:1.0.0] C:\Users\VARGAS\.gradle\caches\transforms-3\1e39bafb4c4ac422fc08d4a6a96fb9a8\transformed\jetified-window-1.0.0\AndroidManifest.xml:29:13-51
+61            android:required="false" />
+61-->[androidx.window:window:1.0.0] C:\Users\VARGAS\.gradle\caches\transforms-3\1e39bafb4c4ac422fc08d4a6a96fb9a8\transformed\jetified-window-1.0.0\AndroidManifest.xml:30:13-37
+62
+63        <provider
+63-->[androidx.emoji2:emoji2:1.2.0] C:\Users\VARGAS\.gradle\caches\transforms-3\534e568b6a04b6de4cc5291aacfe6866\transformed\jetified-emoji2-1.2.0\AndroidManifest.xml:24:9-32:20
+64            android:name="androidx.startup.InitializationProvider"
+64-->[androidx.emoji2:emoji2:1.2.0] C:\Users\VARGAS\.gradle\caches\transforms-3\534e568b6a04b6de4cc5291aacfe6866\transformed\jetified-emoji2-1.2.0\AndroidManifest.xml:25:13-67
+65            android:authorities="edu.example.lab1.androidx-startup"
+65-->[androidx.emoji2:emoji2:1.2.0] C:\Users\VARGAS\.gradle\caches\transforms-3\534e568b6a04b6de4cc5291aacfe6866\transformed\jetified-emoji2-1.2.0\AndroidManifest.xml:26:13-68
+66            android:exported="false" >
+66-->[androidx.emoji2:emoji2:1.2.0] C:\Users\VARGAS\.gradle\caches\transforms-3\534e568b6a04b6de4cc5291aacfe6866\transformed\jetified-emoji2-1.2.0\AndroidManifest.xml:27:13-37
+67            <meta-data
+67-->[androidx.emoji2:emoji2:1.2.0] C:\Users\VARGAS\.gradle\caches\transforms-3\534e568b6a04b6de4cc5291aacfe6866\transformed\jetified-emoji2-1.2.0\AndroidManifest.xml:29:13-31:52
+68                android:name="androidx.emoji2.text.EmojiCompatInitializer"
+68-->[androidx.emoji2:emoji2:1.2.0] C:\Users\VARGAS\.gradle\caches\transforms-3\534e568b6a04b6de4cc5291aacfe6866\transformed\jetified-emoji2-1.2.0\AndroidManifest.xml:30:17-75
+69                android:value="androidx.startup" />
+69-->[androidx.emoji2:emoji2:1.2.0] C:\Users\VARGAS\.gradle\caches\transforms-3\534e568b6a04b6de4cc5291aacfe6866\transformed\jetified-emoji2-1.2.0\AndroidManifest.xml:31:17-49
+70            <meta-data
+70-->[androidx.lifecycle:lifecycle-process:2.4.1] C:\Users\VARGAS\.gradle\caches\transforms-3\ad3f9e5c67fd014709d35fa44dd2fc49\transformed\jetified-lifecycle-process-2.4.1\AndroidManifest.xml:31:13-33:52
+71                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+71-->[androidx.lifecycle:lifecycle-process:2.4.1] C:\Users\VARGAS\.gradle\caches\transforms-3\ad3f9e5c67fd014709d35fa44dd2fc49\transformed\jetified-lifecycle-process-2.4.1\AndroidManifest.xml:32:17-78
+72                android:value="androidx.startup" />
+72-->[androidx.lifecycle:lifecycle-process:2.4.1] C:\Users\VARGAS\.gradle\caches\transforms-3\ad3f9e5c67fd014709d35fa44dd2fc49\transformed\jetified-lifecycle-process-2.4.1\AndroidManifest.xml:33:17-49
+73        </provider>
+74    </application>
+75
+76</manifest>

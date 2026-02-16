@@ -10,6 +10,9 @@ import androidx.appcompat.app.AppCompatActivity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import android.widget.EditText
+import android.widget.ProgressBar
+
 
 class DashboardActivity : AppCompatActivity() {
     private lateinit var authManager: AuthManager
@@ -166,13 +169,13 @@ class ProfileActivity : AppCompatActivity() {
                 val token = authManager.getToken()
                 if (token != null) {
                     val request = UpdateProfileRequest(
-                        firstName = firstName,
-                        lastName = lastName,
-                        email = email,
-                        phone = if (phone.isEmpty()) null else phone,
-                        address = if (address.isEmpty()) null else address,
-                        city = if (city.isEmpty()) null else city,
-                        country = if (country.isEmpty()) null else country
+                            firstName = firstName,
+                            lastName = lastName,
+                            email = email,
+                            phone = if (phone.isEmpty()) null else phone,
+                            address = if (address.isEmpty()) null else address,
+                            city = if (city.isEmpty()) null else city,
+                            country = if (country.isEmpty()) null else country
                     )
 
                     val response = ApiClient.authApi.updateProfile(token, request)
@@ -194,7 +197,3 @@ class ProfileActivity : AppCompatActivity() {
         }
     }
 }
-
-// Add missing imports
-import android.widget.EditText
-import android.widget.ProgressBar

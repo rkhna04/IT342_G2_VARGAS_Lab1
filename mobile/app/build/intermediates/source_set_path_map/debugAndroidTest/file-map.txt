@@ -1,0 +1,6 @@
+edu.example.lab1.test.app-jetified-core-1.5.0-0 C:\Users\VARGAS\.gradle\caches\transforms-3\981364f02549b9b0bbaf8b55ce060917\transformed\jetified-core-1.5.0\res
+edu.example.lab1.test.app-jetified-annotation-experimental-1.3.0-1 C:\Users\VARGAS\.gradle\caches\transforms-3\eff84b185fd1d8099ffec784073e52ef\transformed\jetified-annotation-experimental-1.3.0\res
+edu.example.lab1.test.app-androidTest-2 C:\Users\VARGAS\IT342_G2_VARGAS_Lab1\mobile\app\build\generated\res\resValues\androidTest\debug
+edu.example.lab1.test.app-mergeDebugAndroidTestResources-3 C:\Users\VARGAS\IT342_G2_VARGAS_Lab1\mobile\app\build\intermediates\incremental\debugAndroidTest\mergeDebugAndroidTestResources\merged.dir
+edu.example.lab1.test.app-mergeDebugAndroidTestResources-4 C:\Users\VARGAS\IT342_G2_VARGAS_Lab1\mobile\app\build\intermediates\incremental\debugAndroidTest\mergeDebugAndroidTestResources\stripped.dir
+edu.example.lab1.test.app-merged_res-5 C:\Users\VARGAS\IT342_G2_VARGAS_Lab1\mobile\app\build\intermediates\merged_res\debugAndroidTest

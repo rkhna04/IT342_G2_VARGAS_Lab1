@@ -1,0 +1,22 @@
+[
+    {
+        "merged": "edu.example.lab1.app-mergeDebugResources-35:/layout/activity_profile.xml",
+        "source": "edu.example.lab1.app-main-38:/layout/activity_profile.xml"
+    },
+    {
+        "merged": "edu.example.lab1.app-mergeDebugResources-35:/layout/activity_register.xml",
+        "source": "edu.example.lab1.app-main-38:/layout/activity_register.xml"
+    },
+    {
+        "merged": "edu.example.lab1.app-mergeDebugResources-35:/layout/activity_main.xml",
+        "source": "edu.example.lab1.app-main-38:/layout/activity_main.xml"
+    },
+    {
+        "merged": "edu.example.lab1.app-mergeDebugResources-35:/layout/activity_dashboard.xml",
+        "source": "edu.example.lab1.app-main-38:/layout/activity_dashboard.xml"
+    },
+    {
+        "merged": "edu.example.lab1.app-mergeDebugResources-35:/layout/activity_login.xml",
+        "source": "edu.example.lab1.app-main-38:/layout/activity_login.xml"
+    }
+]
