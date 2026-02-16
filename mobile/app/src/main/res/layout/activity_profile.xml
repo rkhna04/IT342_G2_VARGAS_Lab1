@@ -1,23 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background">
 
+    <!-- Top navigation bar -->
     <LinearLayout
-        android:layout_width="match_parent"
+        android:id="@+id/top_bar"
+        android:layout_width="0dp"
+        android:layout_height="56dp"
+        android:orientation="horizontal"
+        android:padding="12dp"
+        android:background="@color/topBar"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <Button
+            android:id="@+id/btn_back_top"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="← Back"
+            android:textSize="14sp"
+            android:fontFamily="@font/poppins"
+            android:textColor="@color/textSecondary"
+            android:backgroundTint="@color/cardTint"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp" />
+
+    </LinearLayout>
+
+    <!-- Centered profile card -->
+    <LinearLayout
+        android:id="@+id/profile_card"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="24dp">
+        android:padding="24dp"
+        android:background="@drawable/profile_card_bg"
+        android:elevation="6dp"
+        app:layout_constraintTop_toBottomOf="@id/top_bar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintVertical_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintWidth_percent="0.9">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Edit Profile"
-            android:textSize="28sp"
-            style="@style/TextHeading"
-            android:textColor="@color/primary"
-            android:layout_marginBottom="32dp" />
+            android:text="My Profile"
+            android:textSize="26sp"
+            android:textStyle="bold"
+            android:textColor="@color/textPrimary"
+            android:layout_marginBottom="20dp" />
 
         <EditText
             android:id="@+id/et_first_name"
@@ -26,8 +64,7 @@
             android:hint="First Name"
             android:background="#FFFFFF"
             android:padding="12dp"
-            android:textColor="#333333"
-            android:fontFamily="@font/poppins"
+            android:textColor="@color/textPrimary"
             android:layout_marginBottom="12dp"
             android:backgroundTint="@color/accent_light" />
 
@@ -38,8 +75,7 @@
             android:hint="Last Name"
             android:background="#FFFFFF"
             android:padding="12dp"
-            android:textColor="#333333"
-            android:fontFamily="@font/poppins"
+            android:textColor="@color/textPrimary"
             android:layout_marginBottom="12dp"
             android:backgroundTint="@color/accent_light" />
 
@@ -51,8 +87,7 @@
             android:inputType="textEmailAddress"
             android:background="#FFFFFF"
             android:padding="12dp"
-            android:textColor="#333333"
-            android:fontFamily="@font/poppins"
+            android:textColor="@color/textPrimary"
             android:layout_marginBottom="12dp"
             android:backgroundTint="@color/accent_light" />
 
@@ -64,8 +99,7 @@
             android:inputType="phone"
             android:background="#FFFFFF"
             android:padding="12dp"
-            android:textColor="#333333"
-            android:fontFamily="@font/poppins"
+            android:textColor="@color/textPrimary"
             android:layout_marginBottom="12dp"
             android:backgroundTint="@color/accent_light" />
 
@@ -76,8 +110,7 @@
             android:hint="Address"
             android:background="#FFFFFF"
             android:padding="12dp"
-            android:textColor="#333333"
-            android:fontFamily="@font/poppins"
+            android:textColor="@color/textPrimary"
             android:layout_marginBottom="12dp"
             android:backgroundTint="@color/accent_light" />
 
@@ -88,8 +121,7 @@
             android:hint="City"
             android:background="#FFFFFF"
             android:padding="12dp"
-            android:textColor="#333333"
-            android:fontFamily="@font/poppins"
+            android:textColor="@color/textPrimary"
             android:layout_marginBottom="12dp"
             android:backgroundTint="@color/accent_light" />
 
@@ -100,10 +132,9 @@
             android:hint="Country"
             android:background="#FFFFFF"
             android:padding="12dp"
-            android:textColor="#333333"
-            android:fontFamily="@font/poppins"
-            android:layout_marginBottom="24dp"
-            android:backgroundTint="#D4A574" />
+            android:textColor="@color/textPrimary"
+            android:layout_marginBottom="20dp"
+            android:backgroundTint="@color/accent_light" />
 
         <ProgressBar
             android:id="@+id/progress_bar"
@@ -116,8 +147,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:spacing="12dp">
+            android:orientation="horizontal">
 
             <Button
                 android:id="@+id/btn_save"
@@ -126,7 +156,6 @@
                 android:layout_weight="1"
                 android:text="SAVE"
                 android:textSize="14sp"
-                android:fontFamily="@font/poppins"
                 android:background="@color/primary"
                 android:textColor="#FFFFFF"
                 android:layout_marginEnd="8dp" />
@@ -138,11 +167,11 @@
                 android:layout_weight="1"
                 android:text="BACK"
                 android:textSize="14sp"
-                android:fontFamily="@font/poppins"
                 android:background="@color/accent"
                 android:textColor="#FFFFFF" />
 
         </LinearLayout>
 
     </LinearLayout>
-</ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
